@@ -1,0 +1,1 @@
+export const mainUrl = 'https://api.theqprint.com/'

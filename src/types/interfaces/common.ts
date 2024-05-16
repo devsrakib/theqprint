@@ -1,0 +1,27 @@
+import { IProduct } from "./product.interface";
+
+export interface IMeta {
+    limit: number;
+    page: number;
+    total: number;
+}
+
+
+export type ResponseSuccessType ={
+    data:any;
+    meta?: IMeta;
+    // success:boolean;
+
+}
+
+
+export type IGenericErrorResponse = {
+    statusCode?:number;
+    message?:string;
+    errorMessages?:IGenericErrorMessage[];
+}
+
+export type IGenericErrorMessage = {
+    path: string | number;
+    message: string
+}

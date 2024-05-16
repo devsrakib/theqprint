@@ -1,0 +1,96 @@
+import { StyleSheet } from 'react-native';
+import { Color, Font } from '../../constants/GlobalStyle';
+
+export const trackedOrderDetailsStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Color.C_white,
+  },
+  button: {
+    width: '90%',
+    height: 50,
+    borderRadius: 50,
+    position: 'absolute',
+    bottom: 40,
+    alignSelf: 'center',
+  },
+  buttonActionLayer: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    fontSize: Font.Font_L,
+    color: Color.C_white,
+    fontWeight: '600',
+  },
+  cancelModalCon: {
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: Color.C_white,
+  },
+  modalIndicator: {
+    width: 100,
+    height: 6,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 10,
+    backgroundColor: 'rgba(0,0,0,0.1)',
+  },
+  cancellationText: {
+    fontWeight: '600',
+    color: Color.C_black,
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 20,
+    textDecorationStyle: 'dotted',
+    fontSize: Font.Font_XL,
+    marginBottom: 30,
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Color.C_border,
+    alignSelf: 'center',
+    fontSize: Font.Font_X,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  commentInput: {
+    width: '100%',
+    height: 120,
+    borderRadius: 15,
+    borderWidth: 1,
+    borderColor: Color.C_border,
+    padding: 10,
+    fontSize: Font.Font_L,
+    textAlignVertical: 'top',
+  },
+  label: {
+    fontSize: Font.Font_L,
+    marginBottom: 15,
+    color: Color.C_black_eight,
+  },
+  inputAndTextCon: {
+    width: '100%',
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  commentTextLength: {
+    // alignItems: 'flex-end',
+    alignSelf: 'flex-end',
+    marginTop: 10,
+    color: Color.C_H_black,
+  },
+  submitButton: {
+    width: '90%',
+    height: 50,
+    borderRadius: 50,
+    alignSelf: 'center',
+    marginBottom: 40,
+    marginTop: 50,
+  },
+});

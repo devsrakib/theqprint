@@ -1,7 +1,20 @@
-import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import RootStack from './navigation';
+import CartItemProvider from './src/Providers/CartItemProvider';
+import FavItemProvider from './src/Providers/FavItemProvider';
+import Index from './src/routes/stack';
 
 export default function App() {
-  return <RootStack />;
+  return (
+    <FavItemProvider>
+      <CartItemProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Index />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </CartItemProvider>
+    </FavItemProvider>
+  );
 }
