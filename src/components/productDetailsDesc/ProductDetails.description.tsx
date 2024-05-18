@@ -89,8 +89,8 @@ const ProductDetailsDesc = ({
               style={[
                 { height: 5, marginHorizontal: 5, borderRadius: 10 },
                 {
-                  width: currentIndex == index ? 10 : 5,
-                  backgroundColor: currentIndex == index ? Color.C_H_black : '#7F35CD',
+                  width: currentIndex === index ? 10 : 5,
+                  backgroundColor: currentIndex === index ? Color.C_H_black : '#7F35CD',
                 },
               ]}
             />
@@ -120,8 +120,7 @@ const ProductDetailsDesc = ({
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-              style={styles.discountTextCon}
-            >
+              style={styles.discountTextCon}>
               <Text style={styles.discountPercent}>{percentage}% off</Text>
             </LinearGradient>
           </>
@@ -130,8 +129,7 @@ const ProductDetailsDesc = ({
       <Animated.Text
         entering={FadeInDown.delay(50).duration(500)}
         numberOfLines={2}
-        style={styles.title}
-      >
+        style={styles.title}>
         {data?.productName}
       </Animated.Text>
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.productIdandDisc}>

@@ -290,6 +290,9 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setRefreshing(false);
   };
   // Return JSX
+
+  console.log(selectedVariant);
+
   return (
     <SafeAreaView style={{ height: screenHeight }}>
       <View style={productDetailsStyle.navigationAndFavCon}>
@@ -474,6 +477,7 @@ related product ends here
           </LinearGradient>
           <TouchableOpacity
             activeOpacity={0.7}
+            disabled={selectedVariant?.inStock <= 0 ? true : false}
             onPress={() => {
               handleAddToCart(productData);
               animatedCartCounter();

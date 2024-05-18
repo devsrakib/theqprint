@@ -50,6 +50,7 @@ const ProductReviews = ({ item }: { item: any }) => {
                       ratingColor="#F16A26"
                       ratingTextColor="#e9e9e9"
                       startingValue={item?.rating}
+                      readonly
                       style={{ marginBottom: 8 }}
                     />
                     <Text style={{ fontSize: Font.Font_S }}>{item?.comment}</Text>

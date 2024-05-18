@@ -34,6 +34,7 @@ import {
 } from '../../hooks/allHooks';
 import { CartItemContext } from '../../Providers/CartItemProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetworkStatus from '~/pages/internet/NoInternet';
 
 const Home = () => {
   const navigation: any = useNavigation();
@@ -88,13 +89,11 @@ const Home = () => {
           {/* Search and Three-line Container */}
           <Animated.View
             entering={FadeInLeft.delay(50).duration(150)}
-            style={homePageStyle.searchAndthreelineCon}
-          >
+            style={homePageStyle.searchAndthreelineCon}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Search')}
               activeOpacity={0.7}
-              style={homePageStyle.searchContainer}
-            >
+              style={homePageStyle.searchContainer}>
               <Magnify />
               <Text style={homePageStyle.searchText}>Search Products</Text>
             </TouchableOpacity>
@@ -128,8 +127,7 @@ const Home = () => {
             <ScrollView
               contentContainerStyle={{ paddingHorizontal: 10 }}
               showsHorizontalScrollIndicator={false}
-              horizontal
-            >
+              horizontal>
               {sortedData?.data?.map((item: IProduct, index: number) => {
                 return <OfferCart key={index?.toString()} item={item} />;
               })}
@@ -158,6 +156,7 @@ const Home = () => {
         {/* StatusBar */}
         <StatusBar style="dark" />
       </View>
+      <NetworkStatus />
     </View>
   );
 };
