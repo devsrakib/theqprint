@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { Color, Font } from '../../constants/GlobalStyle';
 
 export const productSpecStyle = StyleSheet.create({
@@ -18,6 +19,7 @@ export const productSpecStyle = StyleSheet.create({
     // borderBottomColor: 'rgba(0,0,0,0.2)',
     // borderBottomWidth: 1,
     paddingBottom: 10,
+    // marginLeft: 20,
   },
   specTitle: {
     fontSize: Font.Font_X,

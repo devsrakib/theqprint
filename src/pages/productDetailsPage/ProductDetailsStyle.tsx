@@ -1,4 +1,5 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+
 import { Color, Font, shadows } from '../../constants/GlobalStyle';
 
 export const productDetailsStyle = StyleSheet.create({
@@ -15,8 +16,8 @@ export const productDetailsStyle = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     width: '100%',
-    height: Platform.OS === 'ios' ? 120 : 110,
-    paddingTop: 40,
+    height: 80,
+    // paddingTop: 40,
     backgroundColor: 'rgba(200, 59, 98, 0.06)',
   },
   favAndCartCon: {

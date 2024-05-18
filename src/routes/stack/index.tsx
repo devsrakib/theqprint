@@ -33,8 +33,6 @@ import OptionalSignIn from '../../pages/signUp/optionalSignUpPage/OptionalSignIn
 import Onboarding from '../../pages/onboardingScreen/Onboarding';
 import OrderConfirmation from '../../pages/custom_order/customOrderConfirmation/OrderConfirmation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IProduct } from '../../types/interfaces/product.interface';
-import { isLoggedIn, storeUserInfo } from '../../services/auth.service';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import PrintingOrderHistory from '../../pages/printingOderHistory/PrintingOrderHistory';
@@ -71,8 +69,7 @@ const BottomTab = () => {
           height: Platform.OS === 'ios' ? 80 : 70,
         },
         tabBarHideOnKeyboard: true,
-      }}
-    >
+      }}>
       <Tab.Screen
         options={{
           tabBarIcon: ({ focused }) => {
@@ -91,8 +88,7 @@ const BottomTab = () => {
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
                     fontSize: width <= 380 ? 10 : 12,
-                  }}
-                >
+                  }}>
                   Home
                 </Text>
               </View>
@@ -103,8 +99,7 @@ const BottomTab = () => {
           headerTitleStyle: { marginTop: 30 },
         }}
         name="Home"
-        component={Home}
-      ></Tab.Screen>
+        component={Home}></Tab.Screen>
       <Tab.Screen
         options={{
           headerShown: false,
@@ -124,8 +119,7 @@ const BottomTab = () => {
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
                     fontSize: width <= 380 ? 10 : 12,
-                  }}
-                >
+                  }}>
                   Products
                 </Text>
               </View>
@@ -160,8 +154,7 @@ const BottomTab = () => {
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
                     fontSize: width <= 380 ? 10 : 12,
-                  }}
-                >
+                  }}>
                   Brand
                 </Text>
               </View>
@@ -190,8 +183,7 @@ const BottomTab = () => {
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
                     fontSize: width <= 380 ? 10 : 12,
-                  }}
-                >
+                  }}>
                   Notifications
                 </Text>
               </View>
@@ -220,8 +212,7 @@ const BottomTab = () => {
                     color: focused ? Color.C_main : Color.C_H_black,
                     fontWeight: focused ? '600' : '400',
                     fontSize: width <= 380 ? 10 : 12,
-                  }}
-                >
+                  }}>
                   Profile
                 </Text>
               </View>

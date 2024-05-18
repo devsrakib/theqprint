@@ -1,10 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import ProductReviews from '../../components/productReviews/ProductReviews';
+import ProductSpec from '../../components/productSpec/ProductSpec';
 import { Color, Font } from '../../constants/GlobalStyle';
 import { tabName } from '../../constants/customMaterialTopTab';
-import ProductSpec from '../../components/productSpec/ProductSpec';
-import ProductDesc from '../../components/productDesc/ProductDesc';
-import ProductReviews from '../../components/productReviews/ProductReviews';
 import { IProduct } from '../../types/interfaces/product.interface';
 
 interface tabProps {
@@ -31,14 +31,12 @@ const CustomTab = ({ item }: { item: IProduct }) => {
                   borderBottomWidth: 1,
                   borderBottomColor: tabIndex === tab?.id ? Color.C_main : 'white',
                 },
-              ]}
-            >
+              ]}>
               <Text
                 style={[
                   styles.tabName,
                   { color: tabIndex === tab?.id ? Color.C_main : Color.C_H_black },
-                ]}
-              >
+                ]}>
                 {tab?.tab}
               </Text>
             </TouchableOpacity>
@@ -46,10 +44,10 @@ const CustomTab = ({ item }: { item: IProduct }) => {
         })}
       </View>
       <View>
-        {tabIndex == 1 ? (
+        {tabIndex === 1 ? (
           <ProductSpec item={item?.specifications} />
         ) : (
-          tabIndex == 2 && <ProductReviews item={item} />
+          tabIndex === 2 && <ProductReviews item={item} />
         )}
       </View>
     </>

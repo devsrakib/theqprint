@@ -1,19 +1,20 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 const ShimmerPlaceHolder = createShimmerPlaceholder(LinearGradient);
 
-const ProductDetailSkeleton = () => {
+const ProductImageSkeleton = () => {
   return <ShimmerPlaceHolder style={styles.container} />;
 };
 
-export default ProductDetailSkeleton;
+export default ProductImageSkeleton;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '90%',
     height: 280,
     borderRadius: 15,
+    alignSelf: 'center',
   },
 });

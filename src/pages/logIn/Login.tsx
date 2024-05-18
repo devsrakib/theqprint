@@ -1,30 +1,17 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  Platform,
-  Dimensions,
-  ScrollView,
-} from 'react-native';
-import { loginStyle } from './LoginStyle';
-
-import { Color } from '../../constants/GlobalStyle';
-
-import { Eye, EyeOf } from '../../../assets/allSvg/AllSvg';
-
-import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
-import Modal from 'react-native-modal';
-
-import Animated, { FadeInDown, ZoomInUp } from 'react-native-reanimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import CustomAnimatedLogo from '../../components/customLogo/CustomAnimatedLogo';
+import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import Modal from 'react-native-modal';
+import Animated, { FadeInDown } from 'react-native-reanimated';
+
+import { loginStyle } from './LoginStyle';
+import { Eye, EyeOf } from '../../../assets/allSvg/AllSvg';
 import CustomLoader from '../../components/customLoader/CustomLoader';
+import CustomAnimatedLogo from '../../components/customLogo/CustomAnimatedLogo';
+import { Color } from '../../constants/GlobalStyle';
 
 const Login = () => {
   const navigation: any = useNavigation();

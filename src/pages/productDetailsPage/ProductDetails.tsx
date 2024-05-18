@@ -6,11 +6,22 @@
 */
 
 // Importing necessary dependencies and components
-import { View, Text, TouchableOpacity, Dimensions, ScrollView, RefreshControl } from 'react-native';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { CartBag, FavIcon, Goback } from '../../../assets/allSvg/AllSvg';
+import { MaterialIcons, Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import {
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
+import { Badge } from 'react-native-paper';
 import Animated, {
   FadeInLeft,
   FadeInRight,
@@ -19,28 +30,22 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
+
 import { productDetailsStyle } from './ProductDetailsStyle';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Color } from '../../constants/GlobalStyle';
-import { FlatList } from 'react-native-gesture-handler';
-import RelatedProduct from '../../components/card/relatedProduct/relatedProduct';
-import CustomTab from '../../routes/material_Tab/CustomTab';
-import { Badge } from 'react-native-paper';
-import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
-import { IProduct } from '../../types/interfaces/product.interface';
-import { mainUrl } from '../../constants/mainUrl';
-import {
-  useGetCart,
-  useGetFavourite,
-  useGetProductById,
-  useProductQuery,
-  useUpdateCart,
-} from '../../hooks/allHooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FavItemContext } from '../../Providers/FavItemProvider';
-import { MaterialIcons, Feather } from '@expo/vector-icons';
+import { CartBag, FavIcon, Goback } from '../../../assets/allSvg/AllSvg';
 import { CartItemContext } from '../../Providers/CartItemProvider';
+import { FavItemContext } from '../../Providers/FavItemProvider';
+import RelatedProduct from '../../components/card/relatedProduct/relatedProduct';
+import ProductDetailsDesc from '../../components/productDetailsDesc/ProductDetails.description';
+import { Color } from '../../constants/GlobalStyle';
+import { mainUrl } from '../../constants/mainUrl';
 import { formatExistingCart } from '../../helpers/product/formatCart';
+import { useGetProductById, useProductQuery, useUpdateCart } from '../../hooks/allHooks';
+import CustomTab from '../../routes/material_Tab/CustomTab';
+import { IProduct } from '../../types/interfaces/product.interface';
+import ProductImageSkeleton from '~/components/skeleton/productDetailsSkeleton/ProductImage.skeleton';
+import DetailsSkeleton from '~/components/skeleton/productDetailsSkeleton/DetailsSkeleton';
+import { SafeAreaView } from 'react-native-safe-area-context';
 // Interface for cart data
 export interface ICartData {
   productId: string;
@@ -64,6 +69,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const navigation: any = useNavigation();
   const [isSkeleton, setIsSkeleton] = useState<boolean>(true);
   // const [addFavorite, setAddFavorite] = useState(false);
+  const screenHeight: number = Dimensions.get('screen')?.height;
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -72,7 +78,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const [loader, setLoader] = useState(false);
   const { updateCart } = useUpdateCart();
   const [refreshing, setRefreshing] = useState(false);
-  const { height } = Dimensions.get('screen');
   const animatedY = useSharedValue(0);
   const animatedX = useSharedValue(0);
   const scale = useSharedValue(0);
@@ -226,7 +231,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           'Content-Type': 'application/json',
         },
       });
-      const result = await response.json();
+      await response.json();
       favCtxValue.setRefetch((prev) => prev + 1);
       setLoader(false);
     }
@@ -286,14 +291,13 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   };
   // Return JSX
   return (
-    <View style={{ height: height }}>
+    <SafeAreaView style={{ height: screenHeight }}>
       <View style={productDetailsStyle.navigationAndFavCon}>
         <Animated.View entering={FadeInLeft.duration(500).delay(50)}>
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => navigation.goBack()}
-            style={productDetailsStyle.navAndFav}
-          >
+            style={productDetailsStyle.navAndFav}>
             <Goback />
           </TouchableOpacity>
         </Animated.View>
@@ -324,8 +328,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 addRemoveFavorite(productData, selectedVariant);
               }}
               activeOpacity={0.7}
-              style={productDetailsStyle.navAndFav}
-            >
+              style={productDetailsStyle.navAndFav}>
               {isFavItem ? (
                 <MaterialIcons name="favorite" size={20} color={Color.C_main} />
               ) : loader ? (
@@ -340,55 +343,62 @@ const ProductDetails: React.FC<IProduct> = (props) => {
       </View>
       <ScrollView
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-        ref={scrollViewRef}
-      >
+        ref={scrollViewRef}>
         <Animated.View style={[productDetailsStyle.imageAndNavContainer]}>
           <Animated.View>
             {/* ============================================ */}
             {/* ============================================ */}
 
-            <FlatList
-              horizontal={true}
-              pagingEnabled={true}
-              onScroll={(event) => {
-                const contentOffsetX = event.nativeEvent.contentOffset.x;
-                const currentIndex = Math.round(contentOffsetX / cartWidth);
-                setCurrentIndex(currentIndex);
-              }}
-              showsHorizontalScrollIndicator={false}
-              style={{ height: 280 }}
-              data={productData?.productPhotos}
-              renderItem={({ item: img }) => {
-                return (
-                  <Animated.Image
-                    source={{ uri: `${mainUrl}${img}` }}
-                    // onError={}
-                    style={{
-                      width: cartWidth,
-                      height: 280,
-                      alignSelf: 'center',
-                      resizeMode: 'cover',
-                    }}
+            {productData?.productPhotos ? (
+              <FlatList
+                horizontal
+                pagingEnabled
+                onScroll={(event) => {
+                  const contentOffsetX = event.nativeEvent.contentOffset.x;
+                  const currentIndex = Math.round(contentOffsetX / cartWidth);
+                  setCurrentIndex(currentIndex);
+                }}
+                showsHorizontalScrollIndicator={false}
+                style={{ height: 280, width: '100%' }}
+                data={productData?.productPhotos}
+                renderItem={({ item: img }) => {
+                  return (
+                    <Animated.Image
+                      source={{ uri: `${mainUrl}${img}` }}
+                      // onError={}
+                      style={{
+                        width: cartWidth,
+                        height: 280,
+                        alignSelf: 'center',
+                        resizeMode: 'cover',
+                      }}
 
-                    // Add any other styles or animations as needed
-                  />
-                );
-              }}
-            />
+                      // Add any other styles or animations as needed
+                    />
+                  );
+                }}
+              />
+            ) : (
+              <ProductImageSkeleton />
+            )}
           </Animated.View>
         </Animated.View>
         {/* price and quantity container */}
         {/* product details container here*/}
         {/* ================================================ */}
         {/* ================================================ */}
-        <ProductDetailsDesc
-          data={productData}
-          selectedVariant={selectedVariant}
-          setSelectedVariant={setSelectedVariant}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          currentIndex={currentIndex}
-        />
+        {productData ? (
+          <ProductDetailsDesc
+            data={productData}
+            selectedVariant={selectedVariant}
+            setSelectedVariant={setSelectedVariant}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            currentIndex={currentIndex}
+          />
+        ) : (
+          <DetailsSkeleton />
+        )}
         {/* view more information container */}
         {/* ================================================ */}
         {/* ================================================ */}
@@ -398,8 +408,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           <ScrollView
             contentContainerStyle={{ paddingRight: 20 }}
             horizontal
-            showsHorizontalScrollIndicator={false}
-          >
+            showsHorizontalScrollIndicator={false}>
             {filterRelatedData?.map((item: IProduct) => {
               return <RelatedProduct item={item} scrollToTop={scrollToTop} />;
             })}
@@ -420,8 +429,7 @@ related product ends here
         style={[
           productDetailsStyle.BuyNowButtonAndAddToCartCon,
           { height: productData?.bulk?.minOrder ? 138 : 100 },
-        ]}
-      >
+        ]}>
         {productData?.bulk?.discount && (
           <View style={productDetailsStyle.offerPercentCon}>
             <Text>
@@ -441,8 +449,7 @@ related product ends here
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             colors={['#C83B62', '#7F35CD']}
-            style={productDetailsStyle.linearButton}
-          >
+            style={productDetailsStyle.linearButton}>
             <TouchableOpacity
               onPress={() => {
                 let selectedVar;
@@ -461,8 +468,7 @@ related product ends here
                   source: sourcePage,
                 });
               }}
-              style={productDetailsStyle.buyButton}
-            >
+              style={productDetailsStyle.buyButton}>
               <Text style={productDetailsStyle.buttonText}>Buy Now</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -472,18 +478,17 @@ related product ends here
               handleAddToCart(productData);
               animatedCartCounter();
             }}
-            style={productDetailsStyle.cartButton}
-          >
+            style={productDetailsStyle.cartButton}>
             <Text style={productDetailsStyle.addTorCartText}>Add To Cart</Text>
             <CartBag />
           </TouchableOpacity>
           <Animated.View style={[productDetailsStyle.quantityAnimCon, animatedStyle]}>
-            <Text style={productDetailsStyle.badgeText}>{'+1'}</Text>
+            <Text style={productDetailsStyle.badgeText}>+1</Text>
           </Animated.View>
         </View>
       </View>
       <StatusBar style="dark" backgroundColor="#F8F3FB" />
-    </View>
+    </SafeAreaView>
   );
 };
 
