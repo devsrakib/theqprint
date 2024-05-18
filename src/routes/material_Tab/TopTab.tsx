@@ -33,19 +33,20 @@ export const TopTab = ({ brandName, searchText }: { brandName: any; searchText: 
       {/* =============================== */}
       <Tab.Navigator
         screenOptions={{
+          tabBarScrollEnabled: true,
           tabBarStyle: {
             backgroundColor: '#FFFFFF', // Background color of the tab bar
           },
           tabBarActiveTintColor: Color.C_main,
           tabBarInactiveTintColor: '#9E9E9E',
-          tabBarLabelStyle: { fontSize: 15, textTransform: 'capitalize' }, // Text style for tab labels
+          tabBarItemStyle: { width: 115 },
+          tabBarLabelStyle: { fontSize: 16, textTransform: 'capitalize', width: 100 },
           tabBarIndicatorStyle: {
             backgroundColor: Color.C_main, // Color of the indicator line
             height: 1, // Height of the indicator line
             borderRadius: 10, // Border radius of the indicator line
           },
-        }}
-      >
+        }}>
         {/* =============================== */}
         {/* Printer Category Tab */}
         {/* =============================== */}

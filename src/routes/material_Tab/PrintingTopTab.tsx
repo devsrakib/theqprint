@@ -6,7 +6,6 @@ import Printing from '../../pages/printingOderHistory/printingOrderTab/Printing'
 import Shipped from '../../pages/printingOderHistory/printingOrderTab/Shipped';
 import OrderRecieve from '../../pages/printingOderHistory/printingOrderTab/OrderRecieve';
 import OrderCancel from '../../pages/printingOderHistory/printingOrderTab/OrderCancel';
-import { useGetAllPrintingByIdQuery } from '../../redux/api/printingSlice';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,8 +30,7 @@ const PrintingTopTab = () => {
           width: 115,
           left: '1%',
         },
-      }}
-    >
+      }}>
       {/* <Tab.Screen name="To Review" component={ToReview} /> */}
       <Tab.Screen name="Order Placed" component={OrderPlaced} />
       <Tab.Screen name="Printing" component={Printing} />

@@ -61,7 +61,6 @@ const ReviewCart = ({ item }: { item: IOrderReview }) => {
       });
 
       const data = await response.json();
-      console.log(data);
 
       setSuccessMessage(data?.success);
       if (response.ok) {

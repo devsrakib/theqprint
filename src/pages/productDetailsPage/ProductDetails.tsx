@@ -291,8 +291,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   };
   // Return JSX
 
-  console.log(selectedVariant);
-
   return (
     <SafeAreaView style={{ height: screenHeight }}>
       <View style={productDetailsStyle.navigationAndFavCon}>

@@ -30,7 +30,7 @@ const SummeryContainer = ({ data }: { data: any }) => {
         <Text style={summerContainerStyle.leftText}>{data?.totalQuantity} Item, 3 Package</Text>
         <Text style={summerContainerStyle.leftText}>
           Total:
-          <Text style={summerContainerStyle.totalPrice}> QR {data?.totalPayable}.00</Text>
+          <Text style={summerContainerStyle.totalPrice}> QR {data?.totalPayable.toFixed(2)}</Text>
         </Text>
       </View>
     </Animated.View>

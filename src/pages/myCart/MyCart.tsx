@@ -171,67 +171,69 @@ const MyCart = () => {
       {/* )} */}
 
       {/* Total price, progress bar, free shipping information, and proceed to checkout button */}
-      <View style={myCartStyle.totalPriceAndProgressCon}>
-        {/* Display the grand total */}
-        <View style={myCartStyle.grandTotalCon}>
-          <Text>Grand Total</Text>
-          <Text>
-            {discountedTotal?.toFixed(2)} <Text>QAR</Text>
-          </Text>
-        </View>
-
-        {/* Display the progress bar */}
-        <View style={{ position: 'relative' }}>
-          <View style={myCartStyle.customProgressBG}>
-            <Animated.View style={progressStyle}>
-              <View style={myCartStyle.percentageValueCon}>
-                {discountedTotal >= targetedAmount ? (
-                  <Text style={{ fontSize: 12 }}>100</Text>
-                ) : (
-                  <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
-                )}
-              </View>
-            </Animated.View>
+      {cartData?.data?.products?.length !== 0 && (
+        <View style={myCartStyle.totalPriceAndProgressCon}>
+          {/* Display the grand total */}
+          <View style={myCartStyle.grandTotalCon}>
+            <Text>Grand Total</Text>
+            <Text>
+              {discountedTotal?.toFixed(2)} <Text>QAR</Text>
+            </Text>
           </View>
-        </View>
 
-        {/* Display information about free shipping */}
-        {discountedTotal >= targetedAmount ? (
-          <View style={myCartStyle.congratsMessageCon}>
-            <AntDesign name="checkcircleo" size={16} color={Color.C_green} />
-            <Text style={myCartStyle.congratsText}>Congratulation! You got free shipping</Text>
+          {/* Display the progress bar */}
+          <View style={{ position: 'relative' }}>
+            <View style={myCartStyle.customProgressBG}>
+              <Animated.View style={progressStyle}>
+                <View style={myCartStyle.percentageValueCon}>
+                  {discountedTotal >= targetedAmount ? (
+                    <Text style={{ fontSize: 12 }}>100</Text>
+                  ) : (
+                    <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                  )}
+                </View>
+              </Animated.View>
+            </View>
           </View>
-        ) : (
-          <Text style={myCartStyle.freeShippingText}>
-            Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}>{targetedAmount}</Text> more
-            to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
-          </Text>
-        )}
 
-        {/* Display the button to proceed to checkout */}
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          colors={['#C83B62', '#7F35CD']}
-          style={myCartStyle.linearContainer}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() =>
-              navigation.navigate('Summery', {
-                ...cartData,
-                source: 'ProductDetailsPage',
-                source2: 'AllCartRemove',
-                CartItem: mycartOrderItem,
-                originalTotalPrice: originalTotalPrice,
-                discountedTotal: discountedTotal,
-                orderQuantity: totalOrderQuantity,
-              })
-            }
-            style={myCartStyle.proceedButton}>
-            <Text style={myCartStyle.proceedText}>Proceed to Checkout</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-      </View>
+          {/* Display information about free shipping */}
+          {discountedTotal >= targetedAmount ? (
+            <View style={myCartStyle.congratsMessageCon}>
+              <AntDesign name="checkcircleo" size={16} color={Color.C_green} />
+              <Text style={myCartStyle.congratsText}>Congratulation! You got free shipping</Text>
+            </View>
+          ) : (
+            <Text style={myCartStyle.freeShippingText}>
+              Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}>{targetedAmount}</Text>{' '}
+              more to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
+            </Text>
+          )}
+
+          {/* Display the button to proceed to checkout */}
+          <LinearGradient
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            colors={['#C83B62', '#7F35CD']}
+            style={myCartStyle.linearContainer}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() =>
+                navigation.navigate('Summery', {
+                  ...cartData,
+                  source: 'ProductDetailsPage',
+                  source2: 'AllCartRemove',
+                  CartItem: mycartOrderItem,
+                  originalTotalPrice: originalTotalPrice,
+                  discountedTotal: discountedTotal,
+                  orderQuantity: totalOrderQuantity,
+                })
+              }
+              style={myCartStyle.proceedButton}>
+              <Text style={myCartStyle.proceedText}>Proceed to Checkout</Text>
+            </TouchableOpacity>
+          </LinearGradient>
+        </View>
+      )}
 
       {/* Display the congratulation lottie */}
       {discountedTotal >= targetedAmount && (

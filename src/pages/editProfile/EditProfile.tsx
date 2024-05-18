@@ -31,11 +31,6 @@ import * as ImagePicker from 'expo-image-picker';
 import Modal from 'react-native-modal';
 import { StatusBar } from 'expo-status-bar';
 import EditProfileTopTab from '../../routes/material_Tab/EditProfileTopTab';
-import { Color } from '../../constants/GlobalStyle';
-import { useGetMeQuery, useUpdateMyAddressMutation } from '../../redux/api/userSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/hook';
-import * as FileSystem from 'expo-file-system';
-import { setProfilePhoto } from '../../redux/features/updateMyAddresSlice';
 import { getFromAsyncStorage } from '../../utils/local-storage';
 import { STORAGE_KEY } from '../../constants/storageKey';
 import { mainUrl } from '../../constants/mainUrl';
@@ -151,8 +146,7 @@ const EditProfile = (props: any) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={['#C83B62', '#7F35CD']}
-        style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 20 }}
-      >
+        style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 30 : 20 }}>
         {/* Header section */}
         <View style={profileStyle.headerContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -164,14 +158,14 @@ const EditProfile = (props: any) => {
         <View style={editProfileStyle.userImgCon}>
           <Image
             style={editProfileStyle.img}
+            resizeMode="contain"
             source={{ uri: `${mainUrl}${data?.data?.profilePhoto}` }}
           />
           <TouchableOpacity
             onPress={() => {
               setIsCameraModalOpen(true);
             }}
-            style={editProfileStyle.cameraIcon}
-          >
+            style={editProfileStyle.cameraIcon}>
             <ColoredCameraIcon />
           </TouchableOpacity>
         </View>
@@ -187,8 +181,7 @@ const EditProfile = (props: any) => {
         onBackButtonPress={() => setIsCameraModalOpen(false)}
         swipeDirection="down"
         isVisible={isCameraModalOpen}
-        style={{ justifyContent: 'flex-end', margin: 0 }}
-      >
+        style={{ justifyContent: 'flex-end', margin: 0 }}>
         <View style={profileStyle.cameraModal}>
           <View style={profileStyle.cameraModalIndicator} />
           <Text style={profileStyle.ProfileModalTitle}>Change Profile Picture</Text>
@@ -198,8 +191,7 @@ const EditProfile = (props: any) => {
                 onPress={() => {
                   selectImage(true);
                 }}
-                style={profileStyle.iconCon}
-              >
+                style={profileStyle.iconCon}>
                 <GalleryIcon />
                 <Text style={profileStyle.profileModalLabel}>Gallery</Text>
               </TouchableOpacity>
@@ -210,8 +202,7 @@ const EditProfile = (props: any) => {
                   selectImage(false);
                   // setIsCameraModalOpen(false);
                 }}
-                style={profileStyle.iconCon}
-              >
+                style={profileStyle.iconCon}>
                 <ModalCameraIcon />
                 <Text style={profileStyle.profileModalLabel}>Camera</Text>
               </TouchableOpacity>

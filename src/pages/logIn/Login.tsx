@@ -68,7 +68,6 @@ const Login = () => {
         body: JSON.stringify(email),
       });
       const result = await response.json();
-      console.log(result);
 
       if (result?.success === true) {
         navigation.navigate('OTP', { sourceForGotPass, email });

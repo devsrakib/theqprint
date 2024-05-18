@@ -188,6 +188,7 @@ const Profile: React.FC = () => {
             ) : (
               <Image
                 style={profileStyle.img}
+                resizeMode="contain"
                 source={{ uri: `${mainUrl}${data?.data?.profilePhoto}` }}
               />
             )}

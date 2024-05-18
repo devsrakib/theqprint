@@ -19,6 +19,7 @@ import { formatExistingCart } from '../../helpers/product/formatCart';
 const AddToCart = ({ item }: { item: any }) => {
   const { cart: cartData, setCart: setCartData } = useContext(CartItemContext);
   const [accessToken, setAccessToken] = useState<string>('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [indicator, setIndicator] = useState(false);
   const { updateCart } = useUpdateCart();
   useEffect(() => {
@@ -134,15 +135,13 @@ const AddToCart = ({ item }: { item: any }) => {
   return (
     <Animated.View
       entering={FadeInDown.delay(100).duration(500)}
-      style={addToCartStyle.cartContainer}
-    >
+      style={addToCartStyle.cartContainer}>
       {item?.variant?.discountPercentage && (
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           colors={['rgba(200, 59, 98, 0.15)', 'rgba(127, 53, 205, 0.15)']}
-          style={addToCartStyle.discountCon}
-        >
+          style={addToCartStyle.discountCon}>
           <Text style={addToCartStyle.discountParcent}>{totalPercentage}%</Text>
         </LinearGradient>
       )}
@@ -150,8 +149,7 @@ const AddToCart = ({ item }: { item: any }) => {
         onPress={() => {
           handleCartItem('removeItem', item);
         }}
-        style={addToCartStyle.close}
-      >
+        style={addToCartStyle.close}>
         <AntDesign name="close" size={20} color="black" />
       </TouchableOpacity>
       <View style={addToCartStyle.productDescAndOthers}>
@@ -164,8 +162,7 @@ const AddToCart = ({ item }: { item: any }) => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               width: '100%',
-            }}
-          >
+            }}>
             <View style={addToCartStyle.titleCon}>
               <Text numberOfLines={2} style={addToCartStyle.title}>
                 {item?.productName}
@@ -202,8 +199,7 @@ const AddToCart = ({ item }: { item: any }) => {
                     fontWeight: '400',
                     textDecorationLine: 'line-through',
                   },
-                ]}
-              >
+                ]}>
                 {item?.variant?.sellingPrice} QAR
               </Text>
             </View>
@@ -211,14 +207,12 @@ const AddToCart = ({ item }: { item: any }) => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-              }}
-            >
+              }}>
               <TouchableOpacity
                 onPress={() => {
                   handleCartItem('decreament', item);
                 }}
-                style={addToCartStyle.plusAndMinus}
-              >
+                style={addToCartStyle.plusAndMinus}>
                 <AntDesign name="minus" size={16} color="black" />
               </TouchableOpacity>
               <Text style={addToCartStyle.quantity}>{item?.orderQuantity}</Text>
@@ -226,8 +220,7 @@ const AddToCart = ({ item }: { item: any }) => {
                 onPress={() => {
                   handleCartItem('increament', item);
                 }}
-                style={addToCartStyle.plusAndMinus}
-              >
+                style={addToCartStyle.plusAndMinus}>
                 <AntDesign name="plus" size={16} color="black" />
               </TouchableOpacity>
             </View>

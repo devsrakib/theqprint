@@ -28,7 +28,6 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
   const [indicator, setIndicator] = useState(false);
   const nagivation = useNavigation<any>();
   const favCtxValue = useContext<any>(FavItemContext);
-  console.log(data?.data?._id);
 
   const defaultVar = data?.data?.variants?.find((i: any) => i?.isDefault === true);
 
@@ -131,8 +130,7 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
     <CustomTouchable
       entering={FadeInDown.delay(50).duration(500)}
       style={[favoriteCartStyle.container]}
-      onPress={() => nagivation.navigate('ProductDetails', { FavProductId: data?.data?._id })}
-    >
+      onPress={() => nagivation.navigate('ProductDetails', { FavProductId: data?.data?._id })}>
       <View style={favoriteCartStyle.itemCon}>
         <View style={favoriteCartStyle.imgCon}>
           <Image
