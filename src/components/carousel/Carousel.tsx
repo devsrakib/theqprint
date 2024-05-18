@@ -13,11 +13,11 @@
  * @returns JSX.Element
  */
 
-import { View, Animated } from 'react-native';
 import React, { useRef, useState } from 'react';
-import SliderItem from './SliderItem';
+import { View, Animated } from 'react-native';
+
 import Pagination from './Pagination';
-import { useGetCarouselQuery } from '../../redux/api/carouselSlider';
+import SliderItem from './SliderItem';
 import { useCarousel } from '../../hooks/allHooks';
 const Carousel = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
