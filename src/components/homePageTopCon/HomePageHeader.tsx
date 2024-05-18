@@ -1,10 +1,10 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from 'react';
+import { View, Image, TouchableOpacity } from 'react-native';
+import { Badge } from 'react-native-paper';
+
 import { homePageStyle } from './HomePageHeaderStyle';
 import { CartBag } from '../../../assets/allSvg/AllSvg';
-import { Badge } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { useGetCart } from '../../hooks/allHooks';
 import { CartItemContext } from '../../Providers/CartItemProvider';
 
 const HomePageTopCon = () => {
@@ -18,8 +18,7 @@ const HomePageTopCon = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate('MyCart')}
           activeOpacity={0.7}
-          style={homePageStyle.cart}
-        >
+          style={homePageStyle.cart}>
           <CartBag />
           <Badge style={homePageStyle.badge}>{cart?.data?.products?.length}</Badge>
         </TouchableOpacity>

@@ -4,21 +4,21 @@ import { Dimensions } from 'react-native';
 const screenWidth = Dimensions.get('window').width;
 
 export const Font = {
-  Font_STen: screenWidth <= 350 ? 7: screenWidth <= 370 ? 8:  10,
-  Font_S:screenWidth <= 350 ? 8: screenWidth <= 370 ? 10:  12,
-  Font_M:screenWidth <= 350 ? 10: screenWidth <= 370 ? 12 :  14,
-  Font_L:screenWidth <= 350 ? 12: screenWidth <= 370 ? 14 :  16,
-  Font_X: screenWidth <= 350 ? 14: screenWidth <= 370 ? 16 :  18,
-  Font_XL: screenWidth <= 350 ? 16: screenWidth <= 370 ? 18 :  20,
-  Font_XXL: screenWidth <= 350 ? 20: screenWidth <= 370 ? 22 :  24,
-  Font_XXXL: screenWidth <= 350 ? 22: screenWidth <= 370 ? 24 :  26,
-  Font_4XL: screenWidth <= 350 ?24:  screenWidth <= 370 ? 26 : 28,
-  Font_FXL: screenWidth <= 350 ? 26: screenWidth <= 370 ? 28 :  30,
+  Font_STen: screenWidth <= 350 ? 7 : screenWidth <= 370 ? 8 : 10,
+  Font_S: screenWidth <= 350 ? 8 : screenWidth <= 370 ? 10 : 12,
+  Font_M: screenWidth <= 350 ? 10 : screenWidth <= 370 ? 12 : 14,
+  Font_L: screenWidth <= 350 ? 12 : screenWidth <= 370 ? 14 : 16,
+  Font_X: screenWidth <= 350 ? 14 : screenWidth <= 370 ? 16 : 18,
+  Font_XL: screenWidth <= 350 ? 16 : screenWidth <= 370 ? 18 : 20,
+  Font_XXL: screenWidth <= 350 ? 20 : screenWidth <= 370 ? 22 : 24,
+  Font_XXXL: screenWidth <= 350 ? 22 : screenWidth <= 370 ? 24 : 26,
+  Font_4XL: screenWidth <= 350 ? 24 : screenWidth <= 370 ? 26 : 28,
+  Font_FXL: screenWidth <= 350 ? 26 : screenWidth <= 370 ? 28 : 30,
 };
 
 export const Color = {
   C_main: '#980442',
-  C_second: '',
+  C_second: '#FFE5E5',
   C_third: '',
   C_shadow: 'rgba(0,0,0,0.4)',
   C_white: '#ffffff',

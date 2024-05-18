@@ -1,9 +1,8 @@
-import { View, Text, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { View, Text, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+
 import { orderAndPrinterDesignStyle } from './CustomOrderStyle';
 import CommonHeader from '../../components/common/commonHeader/CommonHeader';
-import PrintingPaperSizeComponent from '../../components/PrintingDesignComponent/paperSize/PrintingPaperSizeComponent';
-import PaperTypeComponent from '../../components/PrintingDesignComponent/paperType/PaperTypeComponent';
 import TotalOrderComponent from '../../components/PrintingDesignComponent/placedOrder/PlacedOrder';
 import { StatusBar } from 'expo-status-bar';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -13,10 +12,8 @@ import { paperTypeStyle } from '../../components/PrintingDesignComponent/paperTy
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Upload } from '../../../assets/allSvg/AllSvg';
-import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { IColorMode, IPaperType, IpaperSize } from '../../types/interfaces/paparType.interface';
-import { useGetPaperSizeQueryQuery } from '../../redux/api/printingSlice';
 import { useGetPrinting } from '../../hooks/allHooks';
 
 const OrderAndPrinterDesignPage = () => {
@@ -119,8 +116,7 @@ const OrderAndPrinterDesignPage = () => {
         {/* dummy text container */}
         <Animated.View
           entering={FadeInDown.delay(50).duration(500)}
-          style={orderAndPrinterDesignStyle.dummyTextContainer}
-        >
+          style={orderAndPrinterDesignStyle.dummyTextContainer}>
           <Text style={orderAndPrinterDesignStyle.text_one}>Request for a Printing</Text>
           <Text style={orderAndPrinterDesignStyle.text_Two}>
             We will print your design and send it to your delivery address
@@ -129,8 +125,7 @@ const OrderAndPrinterDesignPage = () => {
         {/* paper size container */}
         <Animated.View
           entering={FadeInDown.delay(50).duration(550)}
-          style={paperSizeStyle.container}
-        >
+          style={paperSizeStyle.container}>
           <Text style={paperSizeStyle.title}>Printing Paper size (Free)</Text>
           {/* paper size container */}
           <View style={paperSizeStyle.paperSizeCon}>
@@ -158,8 +153,7 @@ const OrderAndPrinterDesignPage = () => {
                             ? bgColor
                             : Color.C_border,
                     },
-                  ]}
-                >
+                  ]}>
                   <Text style={paperSizeStyle.sizeText}>{`${i?.height} x ${i?.width}`}</Text>
                 </TouchableOpacity>
               );
@@ -202,8 +196,7 @@ const OrderAndPrinterDesignPage = () => {
         {/* paper type container */}
         <Animated.View
           entering={FadeInDown.delay(50).duration(550)}
-          style={paperTypeStyle.container}
-        >
+          style={paperTypeStyle.container}>
           <Text style={paperTypeStyle.title}>What type of paper do you need?</Text>
           {/* all paper type container */}
           <View style={paperTypeStyle.paperTypeCon}>
@@ -214,8 +207,7 @@ const OrderAndPrinterDesignPage = () => {
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                   style={[paperTypeStyle.typeItem]}
-                  key={index.toString()}
-                >
+                  key={index.toString()}>
                   <TouchableOpacity
                     onPress={() => {
                       setSelectedPaperType(i);
@@ -223,16 +215,14 @@ const OrderAndPrinterDesignPage = () => {
                     }}
                     style={paperTypeStyle.actionLayer}
                     activeOpacity={0.7}
-                    key={index.toString()}
-                  >
+                    key={index.toString()}>
                     <Text
                       style={[
                         paperTypeStyle.paperTypeText,
                         {
                           color: currentIndex === index ? Color.C_white : 'rgba(0,0,0,0.7)',
                         },
-                      ]}
-                    >
+                      ]}>
                       {i?.printingSetupType}{' '}
                       <Text>
                         ( {i?.price}
@@ -258,16 +248,14 @@ const OrderAndPrinterDesignPage = () => {
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
                     style={paperTypeStyle.mode}
-                    key={index.toString()}
-                  >
+                    key={index.toString()}>
                     <TouchableOpacity
                       activeOpacity={0.7}
                       style={paperTypeStyle.actionLayer}
                       onPress={() => {
                         setSelectedColorMode(i);
                         handlePrintMode(index);
-                      }}
-                    >
+                      }}>
                       <Text
                         style={[
                           paperTypeStyle.modeItemText,
@@ -275,8 +263,7 @@ const OrderAndPrinterDesignPage = () => {
                             color:
                               currentIndexInPrint === index ? Color.C_white : 'rgba(0,0,0,0.7)',
                           },
-                        ]}
-                      >
+                        ]}>
                         {i?.printingColorMode}{' '}
                         <Text>
                           ( {i?.price}
@@ -296,8 +283,7 @@ const OrderAndPrinterDesignPage = () => {
             <TouchableOpacity
               onPress={() => handleFilePick()}
               activeOpacity={0.7}
-              style={paperTypeStyle.uploadButton}
-            >
+              style={paperTypeStyle.uploadButton}>
               <Upload />
               <Text style={paperTypeStyle.uploadButtonText}>
                 {selectedFile ? selectedFile?.slice(0, 20) + '...' : 'Upload file'}

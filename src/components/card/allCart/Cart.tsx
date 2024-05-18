@@ -1,23 +1,22 @@
-import { View, Text, Image, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import { IProduct } from '../../../types/interfaces/product.interface';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
+
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 import { mainUrl } from '../../../constants/mainUrl';
+import { IProduct } from '../../../types/interfaces/product.interface';
 
 // cart props
 
 const Cart = ({ item }: { item: IProduct }) => {
   const navigation: any = useNavigation();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const defaultItem = item.variants?.find((defaultVariant) => defaultVariant?.isDefault);
   return (
     <Animated.View style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => navigation.navigate('ProductDetails', { productId: item?._id })}
-      >
+        onPress={() => navigation.navigate('ProductDetails', { productId: item?._id })}>
         <View style={styles.imgCon}>
           {/* <FlatList
             pagingEnabled={true}

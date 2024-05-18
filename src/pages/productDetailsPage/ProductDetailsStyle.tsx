@@ -18,7 +18,8 @@ export const productDetailsStyle = StyleSheet.create({
     width: '100%',
     height: 80,
     // paddingTop: 40,
-    backgroundColor: 'rgba(200, 59, 98, 0.06)',
+    // backgroundColor: 'rgba(200, 59, 98, 0.06)',
+    backgroundColor: Color.C_white,
   },
   favAndCartCon: {
     flexDirection: 'row',

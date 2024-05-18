@@ -41,7 +41,7 @@ export const addToCartStyle = StyleSheet.create({
   imgCon: {
     padding: 10,
     borderRadius: 10,
-    backgroundColor: Color.C_shadow,
+    backgroundColor: Color.C_second,
     width: 90,
     height: 90,
     marginRight: 10,

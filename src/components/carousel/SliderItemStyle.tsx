@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+
 import { Color, Font } from '../../constants/GlobalStyle';
 
 const width = Dimensions.get('window').width;

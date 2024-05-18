@@ -239,7 +239,9 @@ const Profile: React.FC = () => {
                 <MaterialCommunityIcons name="comment-edit-outline" size={22} color="#4e4b51" />
                 <Text style={profileStyle.title}>Review</Text>
                 {/* ============================== */}
-                <Badge style={profileStyle.reviewBaseStyle}>{orderNotReviewedItem?.length}</Badge>
+                {orderNotReviewedItem?.length >= 1 && (
+                  <Badge style={profileStyle.reviewBaseStyle}>{orderNotReviewedItem?.length}</Badge>
+                )}
               </View>
               <GoArrow />
             </TouchableOpacity>

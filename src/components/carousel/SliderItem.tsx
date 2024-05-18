@@ -1,8 +1,8 @@
-import { View, Text, Image, TouchableOpacity, Linking, ImageBackground } from 'react-native';
 import React from 'react';
-import { sliderItemStyle } from './SliderItemStyle';
-// import mainUrl  from '../../../'
+import { View, Text, Image, TouchableOpacity, Linking, ImageBackground } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
+
+import { sliderItemStyle } from './SliderItemStyle';
 import { mainUrl } from '../../constants/mainUrl';
 const SliderItem = ({ item }: any) => {
   const openWebLink = (url: string) => {
