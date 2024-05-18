@@ -20,7 +20,9 @@ const HomePageTopCon = () => {
           activeOpacity={0.7}
           style={homePageStyle.cart}>
           <CartBag />
-          <Badge style={homePageStyle.badge}>{cart?.data?.products?.length}</Badge>
+          <Badge style={homePageStyle.badge}>
+            {cart?.data?.products?.length ? cart?.data?.products?.length : '0'}
+          </Badge>
         </TouchableOpacity>
       )}
     </View>

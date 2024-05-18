@@ -45,7 +45,7 @@ const SliderItem = ({ item }: any) => {
         </ImageBackground>
       ) : (
         <Animated.View
-          style={[sliderItemStyle.container, { backgroundColor: item?.backgroundColor }]}>
+          style={[sliderItemStyle.container, { backgroundColor: `#${item?.backgroundColor}` }]}>
           <Animated.View
             entering={FadeIn.delay(50).duration(555).damping(20).springify()}
             style={{ flex: 1, flexDirection: 'row' }}>

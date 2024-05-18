@@ -7,8 +7,6 @@ export const productSpecStyle = StyleSheet.create({
     paddingHorizontal: 10,
     paddingTop: 15,
     paddingBottom: 15,
-    borderBottomColor: 'rgba(0,0,0,0.2)',
-    borderBottomWidth: 1,
   },
   specBox: {
     backgroundColor: Color.C_white,

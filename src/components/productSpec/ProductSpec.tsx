@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Divider } from 'react-native-paper';
 import Animated, { FadeInRight } from 'react-native-reanimated';
 
 import { productSpecStyle } from './ProductSpecStyle';
@@ -23,6 +24,7 @@ const ProductSpec = ({ item }: { item: ISpecification[] }) => {
                 </View>
               );
             })}
+            <Divider style={{ width: '95%', alignSelf: 'center' }} />
           </View>
         );
       })}
