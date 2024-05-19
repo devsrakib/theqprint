@@ -45,6 +45,7 @@ import {
   ActiveProduct,
   ActiveUser,
 } from '../../../assets/allSvg/AllSvg';
+import { useUser } from '~/hooks/allHooks';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -230,11 +231,17 @@ const Index = () => {
   const navigation = useNavigation();
   const [initialRoute, setInitialRoute] = useState<string | undefined>(undefined);
 
+  const { data } = useUser();
+  console.log('hello', data?.success);
+
   useEffect(() => {
     const checkAccessToken = async () => {
       // const accessToken = await isLoggedIn();
       const userVarify = await AsyncStorage.getItem('varifyUser');
-      setInitialRoute(userVarify ? 'BottomTab' : 'login');
+      // if(!userVarify || !data?.success || !data?.data?.isVerified){
+      //   setInitialRoute('login')
+      // }
+      setInitialRoute(userVarify || data?.success ? 'BottomTab' : 'login');
     };
 
     checkAccessToken();

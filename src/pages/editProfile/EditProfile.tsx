@@ -251,7 +251,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const EditProfile = () => {
   const navigation = useNavigation();
-  const { data } = useUser();
+  const { data, setRefetch } = useUser();
   const [collectedProfilePhoto, setCollectedProfilePhoto] = useState(null);
   const [isCameraModalOpen, setIsCameraModalOpen] = useState(false);
   const [accessToken, setAccessToken] = useState('');
@@ -302,11 +302,6 @@ const EditProfile = () => {
   };
 
   const uploadImage = async () => {
-    if (!selectedImage) {
-      alert('Please select an image first');
-      return;
-    }
-
     try {
       const formData = new FormData();
       formData.append(
@@ -335,6 +330,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (selectedImage) {
       uploadImage();
+      setRefetch((prev) => prev + 1);
     }
   }, [selectedImage]);
 
