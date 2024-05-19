@@ -78,11 +78,12 @@ const ProductDetailsDesc = ({
   } else {
     percentage = disCountePercentage;
   }
+  const photos = data?.productPhotos || [];
 
   return (
     <View style={styles.description}>
       <View style={styles.paginationCon}>
-        {data?.productPhotos?.map((_: any, index: number) => {
+        {photos?.map((_: any, index: number) => {
           return (
             <View
               key={index.toString()}

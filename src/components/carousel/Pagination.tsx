@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Animated, Dimensions } from 'react-native';
+
 import { Color } from '../../constants/GlobalStyle';
 
 const { width } = Dimensions.get('screen');
@@ -18,8 +19,7 @@ const Pagination: React.FC<PaginationProps> = ({ data, scrollX, index }) => {
         width: '100%',
         justifyContent: 'center',
         marginTop: 15,
-      }}
-    >
+      }}>
       {data?.map((_, idx) => {
         const inputRange = [(idx - 1) * width, idx * width, (idx + 1) * width];
         const dotWidth = scrollX.interpolate({

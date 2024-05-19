@@ -290,6 +290,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setRefreshing(false);
   };
   // Return JSX
+  console.log(selectedVariant);
 
   return (
     <SafeAreaView style={{ height: screenHeight }}>
@@ -361,21 +362,30 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 }}
                 showsHorizontalScrollIndicator={false}
                 style={{ height: 280, width: '100%' }}
-                data={productData?.productPhotos}
+                data={
+                  selectedVariant?.isDefault === true
+                    ? productData?.productPhotos
+                    : selectedVariant?.variantPhotos
+                }
                 renderItem={({ item: img }) => {
                   return (
-                    <Animated.Image
-                      source={{ uri: `${mainUrl}${img}` }}
-                      // onError={}
-                      style={{
-                        width: cartWidth,
-                        height: 280,
-                        alignSelf: 'center',
-                        resizeMode: 'cover',
-                      }}
+                    <>
+                      <Animated.Image
+                        alt="No Images"
+                        source={{
+                          uri: `${mainUrl}${img}`,
+                        }}
+                        // onError={}
+                        style={{
+                          width: cartWidth,
+                          height: 280,
+                          alignSelf: 'center',
+                          resizeMode: 'cover',
+                        }}
 
-                      // Add any other styles or animations as needed
-                    />
+                        // Add any other styles or animations as needed
+                      />
+                    </>
                   );
                 }}
               />

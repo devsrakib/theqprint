@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Platform } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { orderAndPrinterDesignStyle } from '../../../pages/custom_order/CustomOrderStyle';
 import { placedOrderStyle } from './PlacedOrderStyle';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -18,6 +18,7 @@ const TotalOrderComponent = ({
 }) => {
   const navigation: any = useNavigation();
   const sourcePage = 'CustomPrinting';
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   // const submitAndroute = () => {
   //   handleSubmit();
   // };
@@ -32,6 +33,16 @@ const TotalOrderComponent = ({
     }
   };
 
+  console.log(jsonData);
+  useEffect(() => {
+    if (
+      jsonData?.printingRequestFile === undefined &&
+      jsonData?.paperTypeId === undefined &&
+      jsonData?.printingColorMode === undefined
+    ) {
+      setButtonDisabled(true);
+    }
+  }, []);
   return (
     <View style={placedOrderStyle.container}>
       {/* <Text>
@@ -46,8 +57,7 @@ const TotalOrderComponent = ({
           <View style={placedOrderStyle.totalOrderItemPlusMinus}>
             <TouchableOpacity
               style={placedOrderStyle.counterIcon}
-              onPress={() => decreaseQuantity()}
-            >
+              onPress={() => decreaseQuantity()}>
               <AntDesign name="minuscircleo" size={20} color="rgba(0,0,0,0.7)" />
             </TouchableOpacity>
             <View style={placedOrderStyle.priceQuantity}>
@@ -55,8 +65,7 @@ const TotalOrderComponent = ({
             </View>
             <TouchableOpacity
               style={placedOrderStyle.counterIcon}
-              onPress={() => increaseQuantity()}
-            >
+              onPress={() => increaseQuantity()}>
               <AntDesign name="pluscircleo" size={20} color="rgba(0,0,0,0.7)" />
             </TouchableOpacity>
           </View>
@@ -82,15 +91,14 @@ const TotalOrderComponent = ({
         colors={['#C83B62', '#7F35CD']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={placedOrderStyle.button}
-      >
+        style={placedOrderStyle.button}>
         <TouchableOpacity
+          disabled={buttonDisabled}
           onPress={() => {
             navigation.navigate('Summery', { ...jsonData, source: sourcePage });
           }}
           activeOpacity={0.7}
-          style={placedOrderStyle.actionLayer}
-        >
+          style={placedOrderStyle.actionLayer}>
           <Text style={placedOrderStyle.buttonText}>Place Order</Text>
         </TouchableOpacity>
       </LinearGradient>
