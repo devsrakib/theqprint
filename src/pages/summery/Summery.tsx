@@ -18,23 +18,12 @@
  * ```
  */
 
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  ScrollView,
-  Keyboard,
-  Linking,
-} from 'react-native';
-import { Dropdown, UpArrow } from '../../../assets/allSvg/AllSvg';
+import { AntDesign } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { summeryStyle } from './SummeryStyle';
 import { LinearGradient } from 'expo-linear-gradient';
-import CommonHeader from '../../components/common/commonHeader/CommonHeader';
-import { Color, Font } from '../../constants/GlobalStyle';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import Animated, {
   Easing,
   FadeInDown,
@@ -44,21 +33,23 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
-import { getFromAsyncStorage } from '../../utils/local-storage';
-import { STORAGE_KEY } from '../../constants/storageKey';
+
+import { summeryStyle } from './SummeryStyle';
+import { Dropdown, UpArrow } from '../../../assets/allSvg/AllSvg';
+import { CartItemContext } from '../../Providers/CartItemProvider';
+import CommonHeader from '../../components/common/commonHeader/CommonHeader';
 import CustomLoader from '../../components/customLoader/CustomLoader';
+import { Color, Font } from '../../constants/GlobalStyle';
 import useKeyboardVisibility from '../../constants/useKeyboad';
-import { ICartData } from '../productDetailsPage/ProductDetails';
 import {
   useGetDeliveryState,
   useGetShippingQuery,
   useNotification,
   useUpdateCart,
 } from '../../hooks/allHooks';
-import { AntDesign } from '@expo/vector-icons';
-import { result } from 'lodash';
-import { CartItemContext } from '../../Providers/CartItemProvider';
+import { AddressFormState } from '../../types/interfaces/signUpAndLogin.interface';
+import { ICartData } from '../productDetailsPage/ProductDetails';
+
 const Summery: React.FC = (props) => {
   //@ts-ignore
   const item = props?.route?.params;
@@ -71,7 +62,6 @@ const Summery: React.FC = (props) => {
   const [printingMessage, setPrintingMessage] = useState();
   const [accessToken, setAccessToken] = useState<string>('');
   const [indicator, setIndicator] = useState(false);
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [formData, setFormData] = useState<AddressFormState>({
     firstName: '',
     lastName: '',
@@ -327,7 +317,7 @@ const Summery: React.FC = (props) => {
 
   useEffect(() => {
     const fetchAccessToken = async () => {
-      const token = await getFromAsyncStorage(STORAGE_KEY);
+      const token = await AsyncStorage.getItem('accessToken');
       setAccessToken(token || ''); // Use empty string as a fallback if token is null
     };
 
@@ -414,8 +404,7 @@ const Summery: React.FC = (props) => {
           {/* Order Summary Box */}
           <Animated.View
             style={summeryStyle.topSummeryBox}
-            entering={FadeInLeft.delay(50).duration(500)}
-          >
+            entering={FadeInLeft.delay(50).duration(500)}>
             {/* Title for the Order Summary */}
             <Text style={summeryStyle.summeryTitle}>Order Summary</Text>
 
@@ -447,8 +436,7 @@ const Summery: React.FC = (props) => {
                 summeryStyle.summeryItemBox,
                 summeryStyle.borderBottomStyle,
                 { paddingBottom: 20 },
-              ]}
-            >
+              ]}>
               <>
                 <Text style={summeryStyle.summeryItemNormalText}>Discount</Text>
                 <Text style={summeryStyle.summeryItemCurrency}>- QR {discount.toFixed(2)}</Text>
@@ -465,8 +453,7 @@ const Summery: React.FC = (props) => {
           {/* Shipping Address Box */}
           <Animated.View
             style={summeryStyle.shiptoBox}
-            entering={FadeInDown.delay(50).duration(500)}
-          >
+            entering={FadeInDown.delay(50).duration(500)}>
             {/* Title for the Shipping Address */}
             <Text style={summeryStyle.shipToText}>Ship to</Text>
 
@@ -481,12 +468,12 @@ const Summery: React.FC = (props) => {
                     paddingBottom: 5,
                     marginBottom: 5,
                   },
-                ]}
-              >
+                ]}>
                 <Image source={require('../../../assets/image/location.png')} />
                 <Text
-                  style={summeryStyle.shipToItemText}
-                >{` ${location?.firstName}  ${location?.lastName},  ${location?.streetAddress} - ${location?.zipCode}, ${location?.state}, ${location?.country} \n ${location?.phoneNumber}`}</Text>
+                  style={
+                    summeryStyle.shipToItemText
+                  }>{` ${location?.firstName}  ${location?.lastName},  ${location?.streetAddress} - ${location?.zipCode}, ${location?.state}, ${location?.country} \n ${location?.phoneNumber}`}</Text>
               </View>
             )}
 
@@ -514,8 +501,7 @@ const Summery: React.FC = (props) => {
               <Animated.View style={[{ marginTop: 20 }, animatedStyle]}>
                 <Animated.View
                   entering={FadeInUp.delay(50).duration(500)}
-                  style={summeryStyle.nameInputContainer}
-                >
+                  style={summeryStyle.nameInputContainer}>
                   <TextInput
                     style={summeryStyle.nameInput}
                     onChangeText={(text) => handleInputChange('firstName', text)}
@@ -530,8 +516,7 @@ const Summery: React.FC = (props) => {
                 <Animated.View entering={FadeInUp.delay(50).duration(510)}>
                   <TouchableOpacity
                     activeOpacity={0.7}
-                    style={[summeryStyle.inputBox, { opacity: 0.4 }]}
-                  >
+                    style={[summeryStyle.inputBox, { opacity: 0.4 }]}>
                     <Text style={summeryStyle.inputText}>Qatar</Text>
                     <Dropdown />
                   </TouchableOpacity>
@@ -543,13 +528,15 @@ const Summery: React.FC = (props) => {
                       ? [summeryStyle.districtBox, { height: 140 }]
                       : summeryStyle.districtBox,
                   ]}
-                  entering={FadeInUp.delay(50).duration(520)}
-                >
+                  entering={FadeInUp.delay(50).duration(520)}>
                   <TouchableOpacity
                     onPress={() => setIsDropdown(!isDropdown)}
                     activeOpacity={0.7}
-                    style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between' }}
-                  >
+                    style={{
+                      width: '100%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
                     <Text style={[summeryStyle.inputText, { color: 'rgba(0,0,0,0.6)' }]}>
                       {formData?.state ? formData?.state : 'state'}
                     </Text>
@@ -561,8 +548,7 @@ const Summery: React.FC = (props) => {
                         onPress={() => {
                           handleInputChange('state', 'Doha'), setIsDropdown(false);
                         }}
-                        style={summeryStyle.dropdownItem}
-                      >
+                        style={summeryStyle.dropdownItem}>
                         <Text>Doha</Text>
                       </TouchableOpacity>
                       <TouchableOpacity
@@ -570,8 +556,7 @@ const Summery: React.FC = (props) => {
                           handleInputChange('state', 'Outside Doha');
                           setIsDropdown(false);
                         }}
-                        style={summeryStyle.dropdownItem}
-                      >
+                        style={summeryStyle.dropdownItem}>
                         <Text>Outside Doha</Text>
                       </TouchableOpacity>
                     </>
@@ -587,8 +572,7 @@ const Summery: React.FC = (props) => {
                 </Animated.View>
                 <Animated.View
                   entering={FadeInUp.delay(50).duration(550)}
-                  style={summeryStyle.nameInputContainer}
-                >
+                  style={summeryStyle.nameInputContainer}>
                   <TextInput
                     style={summeryStyle.nameInput}
                     onChangeText={(text) => handleInputChange('companyName', text)}
@@ -610,8 +594,7 @@ const Summery: React.FC = (props) => {
                       alignItems: 'center',
                     },
                   ]}
-                  entering={FadeInUp.delay(50).duration(560)}
-                >
+                  entering={FadeInUp.delay(50).duration(560)}>
                   <Text style={{ fontSize: Font.Font_M, marginRight: 5 }}>+974</Text>
                   <TextInput
                     style={{ flex: 1 }}
@@ -634,8 +617,7 @@ const Summery: React.FC = (props) => {
                 <Animated.View entering={FadeInUp.delay(50).duration(570)}>
                   <TouchableOpacity
                     style={[summeryStyle.shipToItem, { marginTop: 20 }]}
-                    onPress={() => setDefaultLocation(!defaultLocation)}
-                  >
+                    onPress={() => setDefaultLocation(!defaultLocation)}>
                     {!defaultLocation ? (
                       <View style={summeryStyle.emptyRadio}></View>
                     ) : (
@@ -664,8 +646,7 @@ const Summery: React.FC = (props) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         colors={['#C83B62', '#7F35CD']}
-        style={[summeryStyle.nextButton, keyboardVisible && { display: 'none' }]}
-      >
+        style={[summeryStyle.nextButton, keyboardVisible && { display: 'none' }]}>
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => {
@@ -676,8 +657,7 @@ const Summery: React.FC = (props) => {
             height: '100%',
             alignItems: 'center',
             justifyContent: 'center',
-          }}
-        >
+          }}>
           <Text style={summeryStyle.buttonText}>Order Placed</Text>
         </TouchableOpacity>
       </LinearGradient>

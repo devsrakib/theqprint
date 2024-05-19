@@ -9,8 +9,9 @@ import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 import { useGetOnlineOrder } from '~/hooks/allHooks';
 
 const PringitSummary = ({ item }: { item: any }) => {
-  const { data: notification } = useGetOnlineOrder('');
-  const NData = notification?.data[0];
+  const { data: NData } = useGetOnlineOrder('');
+  // const NData = notification?.data[0];
+  console.log(NData);
 
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(200)} style={styles.container}>

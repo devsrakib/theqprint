@@ -1,3 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -5,23 +8,21 @@ import {
   TextInput,
   ScrollView,
   StyleSheet,
-  Keyboard,
   ToastAndroid,
 } from 'react-native';
 import { Divider } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import { Color, Font } from '../../constants/GlobalStyle';
-import React, { useEffect, useState } from 'react';
-import CustomLoader from '../customLoader/CustomLoader';
 import useKeyboardVisibility from '../../constants/useKeyboad';
 import { useGetShippingAddress } from '../../hooks/allHooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomLoader from '../customLoader/CustomLoader';
 
 interface addressState {
   streetAddress: string;
   state: string;
   companyName: string;
   zipCode: 0;
+  phoneNumber: string;
 }
 const ShippingInfo = () => {
   const [formData, setFormData] = useState<addressState>({
@@ -29,6 +30,7 @@ const ShippingInfo = () => {
     state: '',
     companyName: '',
     zipCode: 0,
+    phoneNumber: '+974',
   });
   const { data, setRefetch } = useGetShippingAddress();
   const defaultAdd = data?.data?.find((addess: any) => addess?.isDefault === true);
@@ -136,7 +138,29 @@ const ShippingInfo = () => {
         <Divider style={styles.dividerStyle} />
 
         <Text style={styles.label}>Phone number</Text>
-        <Text style={{ fontSize: Font.Font_L }}>{defaultAdd?.phoneNumber}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: Font.Font_X, color: 'rgba(0,0,0,0.9)', marginRight: 5 }}>
+            +974
+          </Text>
+          <TextInput
+            style={[styles.input, { flex: 1 }]}
+            placeholderTextColor={Color.C_black_eight}
+            placeholder={`${defaultAdd?.phoneNumber.slice(4, defaultAdd?.phoneNumber)}`}
+            numberOfLines={2}
+            keyboardType="numeric"
+            maxLength={8}
+            onChangeText={(text) => {
+              // Check if the entered text starts with '+974'
+              if (text.startsWith('+974')) {
+                // If yes, update the phoneNumber field with the entered text
+                handleInputChange('phoneNumber', text);
+              } else {
+                // If no, concatenate '+974' with the entered text and update the phoneNumber field
+                handleInputChange('phoneNumber', '+974' + text);
+              }
+            }}
+          />
+        </View>
 
         <Divider style={styles.dividerStyle} />
 

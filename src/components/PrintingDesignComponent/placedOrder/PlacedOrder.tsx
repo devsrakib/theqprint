@@ -41,8 +41,10 @@ const TotalOrderComponent = ({
       jsonData?.printingColorMode === undefined
     ) {
       setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
     }
-  }, []);
+  }, [jsonData]);
   return (
     <View style={placedOrderStyle.container}>
       {/* <Text>
