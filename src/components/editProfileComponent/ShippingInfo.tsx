@@ -12,11 +12,8 @@ import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
 import React, { useEffect, useState } from 'react';
-import { useGetShippingQuery, useUpdateShippingAddressMutation } from '../../redux/api/userSlice';
 import CustomLoader from '../customLoader/CustomLoader';
 import useKeyboardVisibility from '../../constants/useKeyboad';
-import { getFromAsyncStorage } from '../../utils/local-storage';
-import { STORAGE_KEY } from '../../constants/storageKey';
 import { useGetShippingAddress } from '../../hooks/allHooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -149,13 +146,11 @@ const ShippingInfo = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={['#C83B62', '#7F35CD']}
-        style={[styles.updateButton, keyboardVisible && { display: 'none' }]}
-      >
+        style={[styles.updateButton, keyboardVisible && { display: 'none' }]}>
         <TouchableOpacity
           onPress={() => handleSubmit()}
           activeOpacity={0.5}
-          style={styles.updateButtonTouchAction}
-        >
+          style={styles.updateButtonTouchAction}>
           <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
       </LinearGradient>

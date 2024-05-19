@@ -1,9 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
-import { useRef } from 'react';
-import { IProduct } from '../types/interfaces/product.interface';
-
-// const mainUrl = 'http://192.168.0.189:5000/api/v1';
+import { useEffect, useState, useRef } from 'react';
 const mainUrl = 'https://api.theqprint.com/api/v1';
 
 export const useBrand = () => {
