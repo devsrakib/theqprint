@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
-import { useGetMeQuery } from '../../redux/api/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { StatusBar } from 'expo-status-bar';
 import { STORAGE_KEY } from '../../constants/storageKey';
@@ -26,7 +25,7 @@ const EditUserInfo = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [indicator, setIndicator] = useState<boolean>(false);
   const [fullName, setFullName] = useState<string>('');
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('+974');
   const [successMessage, setSuccessMessage] = useState<boolean>(false);
   const [accessToken, setAccessToken] = useState<string>('');
   const [isKeyboardVisible, setKeyboardVisible] = useState<boolean>(false);
@@ -143,15 +142,22 @@ const EditUserInfo = () => {
     }
   };
 
+  useEffect(() => {
+    if (data?.data?.fullName) {
+      setFullName(data?.data?.fullName);
+      setPhoneNumber(data?.data?.phoneNumber);
+    }
+  }, [data]);
+  console.log(data);
+
   return (
     <View style={styles.bodyContainer}>
       <ScrollView>
-        <Text style={styles.label}>First Name</Text>
+        <Text style={styles.label}>Name</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor={Color.C_black_eight}
-          placeholder={`${data?.data?.fullName}`}
-          value={fullName}
+          placeholder={`Enter you name`}
+          value={`${fullName}`}
           onChangeText={(e) => setFullName(e)}
           onFocus={() => setChangeUInfo('UINFO')}
         />
@@ -162,14 +168,18 @@ const EditUserInfo = () => {
           ]}
         />
         <Text style={styles.label}>Phone Number</Text>
-        <TextInput
-          style={styles.input}
-          placeholder={`${data?.data?.phoneNumber}`}
-          value={phoneNumber}
-          onChangeText={(e) => setPhoneNumber(e)}
-          keyboardType="numeric"
-          onFocus={() => setChangeUInfo('UINFO')}
-        />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: Font.Font_X, marginRight: 5 }}>+974</Text>
+          <TextInput
+            style={[styles.input, { flex: 1 }]}
+            placeholder={`Enter you phone`}
+            value={phoneNumber}
+            onChangeText={(e) => setPhoneNumber(e)}
+            keyboardType="numeric"
+            onFocus={() => setChangeUInfo('UINFO')}
+            maxLength={8}
+          />
+        </View>
         <Divider
           style={[
             styles.dividerStyle,
@@ -222,13 +232,11 @@ const EditUserInfo = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
         colors={['#C83B62', '#7F35CD']}
-        style={[styles.updateButton, keyboardVisible && { display: 'none' }]}
-      >
+        style={[styles.updateButton, keyboardVisible && { display: 'none' }]}>
         <TouchableOpacity
           onPress={() => handleFormSubmit()}
           activeOpacity={0.5}
-          style={styles.updateButtonTouchAction}
-        >
+          style={styles.updateButtonTouchAction}>
           <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
       </LinearGradient>

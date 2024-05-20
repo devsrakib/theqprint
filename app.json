@@ -2,7 +2,7 @@
   "expo": {
     "name": "Q Print",
     "slug": "theqprint",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "web": {
       "favicon": "./assets/favicon.png"
     },

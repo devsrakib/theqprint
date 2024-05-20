@@ -46,7 +46,7 @@ export interface ISpecification {
 export interface IDescription {
   type: string;
   data: {
-      title: string;
+    title: string;
   };
   _id: string;
 }
@@ -79,5 +79,6 @@ export interface IProduct {
   __v: number;
   totalReview: number;
   averageRating: number | null;
-  quantity:number
+  quantity: number;
+  orderQuantity: number;
 }

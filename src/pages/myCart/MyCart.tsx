@@ -91,7 +91,7 @@ const MyCart = () => {
       (product?.bulk?.minOrder === 0 || product?.bulk?.minOrder <= product?.orderQuantity)
     ) {
       const bulkDiscountAmount = (payablePrice * product?.bulk?.discount) / 100;
-      payablePrice = payablePrice - bulkDiscountAmount;
+      payablePrice = bulkDiscountAmount ? payablePrice - bulkDiscountAmount : payablePrice;
     }
     const totalPrice = payablePrice * product?.orderQuantity;
 
@@ -101,6 +101,7 @@ const MyCart = () => {
     }
     return totalPrice;
   });
+  console.log(productPriceArray);
 
   const originalPrice = cartData?.data?.products?.map((product: any) => {
     // setOrderQuantity(product?.orderQuantity)

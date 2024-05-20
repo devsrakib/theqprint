@@ -45,7 +45,8 @@
     "react-native-shimmer-placeholder": "^2.0.9",
     "react-native-svg": "^15.2.0",
     "react-native-tab-view": "^3.5.2",
-    "expo-image-manipulator": "~12.0.5"
+    "expo-image-manipulator": "~12.0.5",
+    "expo": "~51.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

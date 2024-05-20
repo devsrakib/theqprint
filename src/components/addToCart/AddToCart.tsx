@@ -19,7 +19,8 @@ import { formatExistingCart } from '../../helpers/product/formatCart';
 const AddToCart = ({ item }: { item: any }) => {
   const { cart: cartData, setCart: setCartData } = useContext(CartItemContext);
   const [accessToken, setAccessToken] = useState<string>('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [indicator, setIndicator] = useState(false);
   const { updateCart } = useUpdateCart();
   useEffect(() => {
@@ -99,6 +100,7 @@ const AddToCart = ({ item }: { item: any }) => {
           ...formatExistingCart(cartData?.data?.products?.slice(isAlreadyExistIndex + 1)),
         ];
         // setRefetch((prev) => prev + 1);
+        setQuantity(isAlreadyExistItem?.orderQuantity);
       }
 
       if (action === 'decreament') {
@@ -130,8 +132,12 @@ const AddToCart = ({ item }: { item: any }) => {
     setCartData({ data: { ...cartData?.data, products: updateData } });
     // api request
     updateCart({ products: updateData });
+    if (product?.orderQuantity >= isAlreadyExistItem?.variant?.inStock) {
+      setIsButtonDisabled(true);
+    } else if (product?.orderQuantity <= isAlreadyExistItem?.variant?.inStock) {
+      setIsButtonDisabled(false);
+    }
   };
-
   return (
     <Animated.View
       entering={FadeInDown.delay(100).duration(500)}
@@ -217,6 +223,7 @@ const AddToCart = ({ item }: { item: any }) => {
               </TouchableOpacity>
               <Text style={addToCartStyle.quantity}>{item?.orderQuantity}</Text>
               <TouchableOpacity
+                disabled={isButtonDisabled}
                 onPress={() => {
                   handleCartItem('increament', item);
                 }}

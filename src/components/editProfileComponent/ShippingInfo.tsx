@@ -21,7 +21,7 @@ interface addressState {
   streetAddress: string;
   state: string;
   companyName: string;
-  zipCode: 0;
+  zipCode: number;
   phoneNumber: string;
 }
 const ShippingInfo = () => {
@@ -52,6 +52,7 @@ const ShippingInfo = () => {
 
     fetchAccessToken();
   }, []);
+  console.log(formData);
 
   const handleSubmit = async () => {
     setIndicator(true);
@@ -73,6 +74,8 @@ const ShippingInfo = () => {
         }
       );
       const data: any = await response.json();
+      console.log(data);
+
       if (data?.success) {
         ToastAndroid.show('Address updated successfully!', ToastAndroid.TOP);
       } else if (data.data.errorMessages && data.data.errorMessages.length > 0) {
@@ -89,6 +92,21 @@ const ShippingInfo = () => {
 
   const keyboardVisible = useKeyboardVisibility();
 
+  useEffect(() => {
+    if (defaultAdd) {
+      setFormData({
+        // ...formData,
+        streetAddress: defaultAdd?.streetAddress || '',
+        state: defaultAdd?.state || '',
+        companyName: defaultAdd?.companyName || '',
+        zipCode: defaultAdd?.zipCode || 0,
+        phoneNumber: defaultAdd?.phoneNumber || '+974',
+      });
+    }
+  }, [defaultAdd]);
+
+  console.log(formData?.zipCode);
+
   return (
     <View style={styles.bodyContainer}>
       <ScrollView>
@@ -98,9 +116,9 @@ const ShippingInfo = () => {
         <Text style={styles.label}>State</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor={Color.C_black_eight}
-          placeholder={`${defaultAdd?.state}`}
+          placeholder="state"
           onChangeText={(text) => handleInputChange('state', text)}
+          value={`${formData?.state}`}
         />
 
         <Divider style={styles.dividerStyle} />
@@ -108,9 +126,9 @@ const ShippingInfo = () => {
         <Text style={styles.label}>Zip Code</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor={Color.C_black_eight}
-          placeholder={`${defaultAdd?.zipCode}`}
-          onChangeText={(text) => handleInputChange('zipCode', parseInt(text))}
+          placeholder="Enter your ZipCode"
+          value={`${formData?.zipCode}`}
+          onChangeText={(text) => handleInputChange('zipCode', Number(text))}
           keyboardType="numeric"
         />
 
@@ -119,9 +137,9 @@ const ShippingInfo = () => {
         <Text style={styles.label}>Company Name (Optional)</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor={defaultAdd?.companyName ? Color.C_black_eight : '#e9e9e9'}
-          placeholder={defaultAdd?.companyName ? defaultAdd?.companyName : '(optional)'}
+          placeholder={'(optional)'}
           onChangeText={(text) => handleInputChange('companyName', text)}
+          value={formData?.companyName}
         />
 
         <Divider style={styles.dividerStyle} />
@@ -129,10 +147,10 @@ const ShippingInfo = () => {
         <Text style={styles.label}>Street Address</Text>
         <TextInput
           style={styles.input}
-          placeholderTextColor={Color.C_black_eight}
-          placeholder={`${defaultAdd?.streetAddress}`}
+          placeholder="street address"
           numberOfLines={2}
           onChangeText={(text) => handleInputChange('streetAddress', text)}
+          value={`${formData?.streetAddress}`}
         />
 
         <Divider style={styles.dividerStyle} />
@@ -144,8 +162,8 @@ const ShippingInfo = () => {
           </Text>
           <TextInput
             style={[styles.input, { flex: 1 }]}
-            placeholderTextColor={Color.C_black_eight}
-            placeholder={`${defaultAdd?.phoneNumber.slice(4, defaultAdd?.phoneNumber)}`}
+            placeholder={`Enter your phone`}
+            value={`${formData?.phoneNumber.slice(4, Number(formData?.phoneNumber))}`}
             numberOfLines={2}
             keyboardType="numeric"
             maxLength={8}
