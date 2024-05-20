@@ -41,7 +41,7 @@ const Login = () => {
       });
       const result = await response.json();
       if (result?.data?.accessToken && result?.data?.user?.isVerified === true) {
-        await AsyncStorage.setItem('varifyUser', 'true');
+        // await AsyncStorage.setItem('varifyUser', 'true');
         await AsyncStorage.setItem('accessToken', result?.data?.accessToken);
         navigation.navigate('BottomTab');
       } else if (result?.data?.accessToken && result?.data?.user?.isVerified === false) {

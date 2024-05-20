@@ -46,6 +46,7 @@ import {
   ActiveUser,
 } from '../../../assets/allSvg/AllSvg';
 import { useUser } from '~/hooks/allHooks';
+import { mainUrl } from '~/constants/mainUrl';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -228,23 +229,37 @@ const BottomTab = () => {
 };
 
 const Index = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const [initialRoute, setInitialRoute] = useState<string | undefined>(undefined);
 
-  const { data } = useUser();
+  // const { data } = useUser();
 
   useEffect(() => {
     const checkAccessToken = async () => {
       // const accessToken = await isLoggedIn();
-      const userVarify = await AsyncStorage.getItem('varifyUser');
-      // if(!userVarify || !data?.success || !data?.data?.isVerified){
-      //   setInitialRoute('login')
-      // }
-      setInitialRoute(userVarify ? 'BottomTab' : !data?.success ? 'login' : 'BottomTab');
+      const accessToken = await AsyncStorage.getItem('accessToken');
+      const res = await fetch(mainUrl + 'api/v1/user/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `bearer ${accessToken}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (data && data?.success) {
+        if (data?.data?.isVerified) {
+          setInitialRoute('BottomTab');
+        } else {
+          navigation.navigate('login');
+        }
+      } else {
+        setInitialRoute('login');
+      }
     };
 
     checkAccessToken();
-  }, [initialRoute, data]);
+  }, [initialRoute]);
 
   if (initialRoute === undefined) {
     return null;
