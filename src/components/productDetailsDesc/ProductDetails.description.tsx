@@ -98,6 +98,7 @@ const ProductDetailsDesc = ({
           );
         })}
       </View>
+
       <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.ratingContainer}>
         {stokeAlert > 0 ? (
           <View style={styles.inStockContainer}>

@@ -232,7 +232,6 @@ const Index = () => {
   const [initialRoute, setInitialRoute] = useState<string | undefined>(undefined);
 
   const { data } = useUser();
-  console.log('hello', data?.success);
 
   useEffect(() => {
     const checkAccessToken = async () => {
@@ -241,11 +240,11 @@ const Index = () => {
       // if(!userVarify || !data?.success || !data?.data?.isVerified){
       //   setInitialRoute('login')
       // }
-      setInitialRoute(userVarify || data?.success ? 'BottomTab' : 'login');
+      setInitialRoute(userVarify ? 'BottomTab' : !data?.success ? 'login' : 'BottomTab');
     };
 
     checkAccessToken();
-  }, [initialRoute]);
+  }, [initialRoute, data]);
 
   if (initialRoute === undefined) {
     return null;
