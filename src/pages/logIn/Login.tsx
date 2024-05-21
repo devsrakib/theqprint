@@ -44,12 +44,14 @@ const Login = () => {
         // await AsyncStorage.setItem('varifyUser', 'true');
         await AsyncStorage.setItem('accessToken', result?.data?.accessToken);
         navigation.navigate('BottomTab');
+        setEmail('');
+        setPassword('');
+        setIsError('');
       } else if (result?.data?.accessToken && result?.data?.user?.isVerified === false) {
         navigation.navigate('OTP');
       }
       setIsError(result?.errorMessages[0].message);
     } catch (error: any) {
-      setIsError(error.message);
     } finally {
       setIndicator(false);
     }

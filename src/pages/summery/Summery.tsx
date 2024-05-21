@@ -62,6 +62,7 @@ const Summery: React.FC = (props) => {
   const [printingMessage, setPrintingMessage] = useState();
   const [accessToken, setAccessToken] = useState<string>('');
   const [indicator, setIndicator] = useState(false);
+  const { data: shippingState } = useGetDeliveryState();
   const [formData, setFormData] = useState<AddressFormState>({
     firstName: '',
     lastName: '',
@@ -190,21 +191,28 @@ const Summery: React.FC = (props) => {
   }
 
   totalPrice = item?.variant?.sellingPrice;
+  // console.log(shippingState?.data?.isFreeShippingActive);
 
-  let deliveryFee = 0; // Assigning a default value
-  if (targetedAmount && item?.discountedTotal && targetedAmount <= item?.discountedTotal) {
-    deliveryFee = 0;
+  let deliveryFee: number; // Assigning a default value
+  if (shippingState?.data?.isFreeShippingActive === false) {
+    if (targetedAmount && item?.discountedTotal && targetedAmount <= item?.discountedTotal) {
+      deliveryFee = 0;
+    }
   }
-  if (location?.state === 'Doha' || formData?.state === 'Doha') {
-    deliveryFee = deliveryCharge?.data?.inside || 0;
-  } else {
+
+  console.log(deliveryCharge?.data?.inside);
+
+  if (formData?.state !== 'Doha' || location?.state !== 'Doha') {
     deliveryFee = deliveryCharge?.data?.outside || 0; // Adding default value here as well
+  } else {
+    deliveryFee = deliveryCharge?.data?.inside || 0;
   }
 
-  if (targetedAmount && item?.discountedTotal && targetedAmount <= item?.discountedTotal) {
-    deliveryFee = 0;
-  }
+  // if (targetedAmount && item?.discountedTotal && targetedAmount <= item?.discountedTotal) {
+  //   deliveryFee = 0;
+  // }
 
+  // console.log(deliveryFee, '_+_+_+_+_+_+_+_+_+_+_+_');
   let grandTotal: number = 0;
 
   if (item?.discountedTotal || item?.variant?.discountedPrice || item?.totalPrice) {

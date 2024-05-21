@@ -22,7 +22,6 @@ const EditProfileTopTab = ({ userdata, image }: any) => {
           tabBarIndicatorStyle: {
             backgroundColor: Color.C_main, // Color of the indicator line
             height: 1, // Height of the indicator line
-            borderRadius: 10, // Border radius of the indicator line
           },
         }}>
         <Tab.Screen name="Personal Info">

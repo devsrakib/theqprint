@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Color } from '../../constants/GlobalStyle';
+import { Color, Font } from '../../constants/GlobalStyle';
 import ToReview from '../../pages/review/ToReview/toReview/ToReview';
 import OrderPlaced from '../../pages/printingOderHistory/printingOrderTab/OrderPlaced';
 import Printing from '../../pages/printingOderHistory/printingOrderTab/Printing';
@@ -19,16 +19,16 @@ const PrintingTopTab = () => {
         },
         tabBarActiveTintColor: Color.C_main,
         tabBarInactiveTintColor: '#9E9E9E',
-        tabBarItemStyle: { width: 125 },
+        tabBarItemStyle: { width: 120 },
         tabBarGap: 0,
         tabBarAndroidRipple: { borderless: false },
-        tabBarLabelStyle: { fontSize: 16, textTransform: 'capitalize', width: 125 },
+        tabBarLabelStyle: { fontSize: Font.Font_M, textTransform: 'capitalize', width: 125 },
         tabBarIndicatorStyle: {
           backgroundColor: Color.C_main,
           height: 1,
           borderRadius: 10,
-          width: 115,
-          left: '1%',
+          width: 100,
+          left: '1.5%',
         },
       }}>
       {/* <Tab.Screen name="To Review" component={ToReview} /> */}

@@ -1,7 +1,6 @@
 import { View, Text, FlatList, RefreshControl } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import HistoryCart from '../../../../components/toReviewCom/history/HistoryCart';
-import { useGetProductReviewQuery, useReviewHistoryQuery } from '../../../../redux/api/reviewSlice';
 import { useReviewHistory, useUser } from '../../../../hooks/allHooks';
 import EmptyData from '../../../../components/common/EmptyData';
 import ReviewSkeleton from '../../../../components/skeleton/Review.skeleton';

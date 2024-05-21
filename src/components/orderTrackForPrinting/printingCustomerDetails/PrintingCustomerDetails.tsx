@@ -11,8 +11,7 @@ const PrintingCustomerDetails = ({ data }: { data: IOrder }) => {
   return (
     <Animated.View
       entering={FadeInDown.delay(50).duration(500)}
-      style={customerContainerStyle.container}
-    >
+      style={customerContainerStyle.container}>
       <View>
         <Text style={customerContainerStyle.orderID}>
           Order ID: <Text style={customerContainerStyle.ID}>{data?.orderId}</Text>
@@ -60,7 +59,7 @@ const PrintingCustomerDetails = ({ data }: { data: IOrder }) => {
       <View>
         <Text style={customerContainerStyle.paidBy}>Paid by</Text>
         <View style={customerContainerStyle.infoCon}>
-          <Text style={customerContainerStyle.cardText}>{data?.payment?.paymentMethod}</Text>
+          <Text style={customerContainerStyle.cardText}>Cash on delivery</Text>
         </View>
       </View>
     </Animated.View>

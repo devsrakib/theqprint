@@ -27,8 +27,7 @@ const RelatedProduct = ({ item, scrollToTop }: { item: IProduct; scrollToTop: an
         onPress={() => {
           scrollToTop();
           navigation.navigate('ProductDetails', { productId: item?._id });
-        }}
-      >
+        }}>
         <View style={styles.imgCon}>
           {/* <FlatList
             pagingEnabled={true}
@@ -115,7 +114,8 @@ const styles = StyleSheet.create({
     shadowRadius: shadows.radius_1,
     shadowOpacity: shadows.opacity_1,
     marginHorizontal: 10,
-    marginVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
   discountCon: {
     width: 30,

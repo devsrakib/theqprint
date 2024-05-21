@@ -34,8 +34,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
             {
               backgroundColor: statusColors?.includes('Order placed') ? 'red' : lightGray,
             },
-          ]}
-        >
+          ]}>
           <NoteBookIcon />
         </View>
         {/* related vertical divider */}
@@ -55,8 +54,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
             {
               backgroundColor: statusColors?.includes('Packaging') ? 'red' : lightGray,
             },
-          ]}
-        >
+          ]}>
           <PackageIcon />
         </View>
         {/* related vertical divider */}
@@ -76,8 +74,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
             {
               backgroundColor: statusColors?.includes('Shipping') ? 'red' : lightGray,
             },
-          ]}
-        >
+          ]}>
           <DeliveryCarIcon />
         </View>
         {/* related vertical divider */}
@@ -96,8 +93,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
             {
               backgroundColor: statusColors?.includes('Delivered') ? 'red' : lightGray,
             },
-          ]}
-        >
+          ]}>
           <HandshackIcon />
         </View>
       </View>
@@ -137,11 +133,11 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
         {/* ======================================== */}
         <View style={styles.stepDetails}>
           {/* order state */}
-          {data?.orderStatus[1]?.time && (
+          {data?.orderStatus[0]?.time && (
             <View style={styles.dateCon}>
               <Clock />
               <Text style={styles.dateText}>
-                {calculateEstimatedTime(data?.orderStatus[1]?.time)}
+                {calculateEstimatedTime(data?.orderStatus[0]?.time)}
               </Text>
             </View>
           )}
@@ -150,8 +146,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
               style={[
                 styles.state,
                 { color: statusColors?.includes('Printing') ? 'black' : 'gray' },
-              ]}
-            >
+              ]}>
               Printing
             </Text>
             <Text style={styles.subState}>Your Order Is ready to prepared by the Seller.</Text>
@@ -173,8 +168,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
               style={[
                 styles.state,
                 { color: statusColors?.includes('Shipping') ? 'black' : 'gray' },
-              ]}
-            >
+              ]}>
               To Ship
             </Text>
             <Text style={styles.subState}>Order has been shipping to your address</Text>
@@ -196,8 +190,7 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
               style={[
                 styles.state,
                 { color: statusColors?.includes('Delivered') ? 'black' : 'gray' },
-              ]}
-            >
+              ]}>
               Order Receive
             </Text>
             <Text style={styles.subState}>Great! Order has been received by you.</Text>

@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Badge } from 'react-native-paper';
 import { useGetCart } from '../../../hooks/allHooks';
 import { CartItemContext } from '../../../Providers/CartItemProvider';
+import HeaderCartIcon from './HeaderCartIcon';
 
 const CommonHeader = ({ title, cartBox }: { title: any; cartBox: boolean }) => {
   const navigation: any = useNavigation();
@@ -17,22 +18,12 @@ const CommonHeader = ({ title, cartBox }: { title: any; cartBox: boolean }) => {
         <TouchableOpacity
           style={commonHeaderStyle.backButton}
           activeOpacity={0.5}
-          onPress={() => navigation.goBack()}
-        >
+          onPress={() => navigation.goBack()}>
           <BackArrow />
         </TouchableOpacity>
         <Text style={commonHeaderStyle.title}>{title}</Text>
       </View>
-      {cartBox && cart?.data?.products?.length ? (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('MyCart')}
-          activeOpacity={0.7}
-          style={commonHeaderStyle.cartIcon}
-        >
-          <CartBag />
-          <Badge style={commonHeaderStyle.badge}>{cart?.data?.products?.length}</Badge>
-        </TouchableOpacity>
-      ) : null}
+      <HeaderCartIcon />
     </View>
   );
 };

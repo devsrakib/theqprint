@@ -3,7 +3,7 @@ import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 export const commonHeaderStyle = StyleSheet.create({
   container: {
-    height: Platform.OS === 'ios' ? 110 : 100,
+    height: Platform.OS === 'ios' ? 110 : 90,
     flexDirection: 'row',
     alignItems: 'center',
     // justifyContent:'center',
@@ -38,21 +38,5 @@ export const commonHeaderStyle = StyleSheet.create({
     fontSize: Font.Font_X,
     fontWeight: '600',
     marginLeft: 10,
-  },
-  cartIcon: {
-    width: 40,
-    height: 40,
-    borderWidth: 1,
-    borderColor: Color.C_border,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  badge: {
-    position: 'absolute',
-    top: -8,
-    right: -8,
-    width: 20,
-    height: 20,
   },
 });

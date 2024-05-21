@@ -52,7 +52,6 @@ const ShippingInfo = () => {
 
     fetchAccessToken();
   }, []);
-  console.log(formData);
 
   const handleSubmit = async () => {
     setIndicator(true);
@@ -74,7 +73,6 @@ const ShippingInfo = () => {
         }
       );
       const data: any = await response.json();
-      console.log(data);
 
       if (data?.success) {
         ToastAndroid.show('Address updated successfully!', ToastAndroid.TOP);
@@ -105,11 +103,11 @@ const ShippingInfo = () => {
     }
   }, [defaultAdd]);
 
-  console.log(formData?.zipCode);
-
   return (
     <View style={styles.bodyContainer}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 50 }}>
         <Text style={styles.label}>Country</Text>
         <Text style={styles.country}>{defaultAdd?.country}</Text>
         <Divider style={styles.dividerStyle} />

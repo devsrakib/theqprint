@@ -18,7 +18,6 @@ export const myCartStyle = StyleSheet.create({
     marginLeft: 20,
   },
   totalPriceAndProgressCon: {
-    height: 190,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: Color.C_white,

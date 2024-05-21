@@ -3,7 +3,7 @@ import { Color, shadows } from '../../constants/GlobalStyle';
 
 export const homePageStyle = StyleSheet.create({
   container: {
-    height: 110,
+    height: 90,
     width: '100%',
     paddingHorizontal: 20,
     alignItems: 'center',
@@ -23,8 +23,8 @@ export const homePageStyle = StyleSheet.create({
     borderBottomWidth: 1,
   },
   logo: {
-    width: 130,
-    height: 60,
+    width: 120,
+    height: 50,
     resizeMode: 'contain',
   },
   cart: {

@@ -39,6 +39,7 @@ import { Badge } from 'react-native-paper';
 import { CustomTouchable } from '../../shared/CustomTouchable';
 import { useGetCart } from '../../hooks/allHooks';
 import { CartItemContext } from '../../Providers/CartItemProvider';
+import HeaderCartIcon from '~/components/common/commonHeader/HeaderCartIcon';
 
 interface ProductsProps {
   itemId: string;
@@ -76,8 +77,7 @@ const Products: React.FC<ProductsProps> = ({ itemId }) => {
               <CustomTouchable
                 entering={FadeInLeft}
                 onPress={() => navigation.goBack()}
-                activeOpacity={0.7}
-              >
+                activeOpacity={0.7}>
                 <BackArrow />
               </CustomTouchable>
               {/* Title */}
@@ -93,8 +93,7 @@ const Products: React.FC<ProductsProps> = ({ itemId }) => {
               {/* Search Input */}
               <Animated.View
                 exiting={ZoomOut.delay(250)}
-                style={[productsStyle.magnifyAndInputCon, animatedStyle]}
-              >
+                style={[productsStyle.magnifyAndInputCon, animatedStyle]}>
                 {isClickedSearch && (
                   <TextInput
                     onChangeText={(text) => setSearchText(text)}
@@ -115,8 +114,7 @@ const Products: React.FC<ProductsProps> = ({ itemId }) => {
                       animation.value = 0;
                     }
                   }}
-                  style={productsStyle.magnify}
-                >
+                  style={productsStyle.magnify}>
                   {isClickedSearch ? (
                     <AntDesign name="close" size={20} color="gray" />
                   ) : (
@@ -126,15 +124,9 @@ const Products: React.FC<ProductsProps> = ({ itemId }) => {
               </Animated.View>
             </Animated.View>
             {!isClickedSearch === true && (
-              <CustomTouchable
-                disabled={data?.data === null}
-                onPress={() => navigation.navigate('MyCart')}
-                entering={ZoomIn.delay(50)}
-                style={productsStyle.cartBag}
-              >
-                <CartBag />
-                <Badge style={productsStyle.badge}>{data?.data?.products?.length}</Badge>
-              </CustomTouchable>
+              <Animated.View entering={ZoomIn.delay(50)} style={productsStyle.cartBag}>
+                <HeaderCartIcon />
+              </Animated.View>
             )}
           </View>
         </View>

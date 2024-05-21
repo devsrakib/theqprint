@@ -6,7 +6,7 @@
 */
 
 // Importing necessary dependencies and components
-import { MaterialIcons, Feather } from '@expo/vector-icons';
+import { MaterialIcons, Feather, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -46,7 +46,7 @@ import { IProduct } from '../../types/interfaces/product.interface';
 import ProductImageSkeleton from '~/components/skeleton/productDetailsSkeleton/ProductImage.skeleton';
 import DetailsSkeleton from '~/components/skeleton/productDetailsSkeleton/DetailsSkeleton';
 import { SafeAreaView } from 'react-native-safe-area-context';
-// Interface for cart data
+import HeaderCartIcon from '~/components/common/commonHeader/HeaderCartIcon';
 export interface ICartData {
   productId: string;
   variant: { variantName: string };
@@ -290,8 +290,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setRefreshing(false);
   };
   // Return JSX
-  console.log(selectedVariant);
-
   return (
     <SafeAreaView style={{ height: screenHeight }}>
       <View style={productDetailsStyle.navigationAndFavCon}>
@@ -304,25 +302,6 @@ const ProductDetails: React.FC<IProduct> = (props) => {
           </TouchableOpacity>
         </Animated.View>
         <View style={productDetailsStyle.favAndCartCon}>
-          <Animated.View entering={FadeInRight.duration(500).delay(50)}>
-            {cartData?.data === null ? null : (
-              <TouchableOpacity onPress={() => navigation.navigate('MyCart')} activeOpacity={0.7}>
-                <CartBag />
-                <Badge style={{ position: 'absolute', top: -12, right: -5 }}>
-                  {cartData?.data?.products?.length}
-                </Badge>
-                <Animated.View style={[productDetailsStyle.badge, animatedStyle2]}>
-                  {cartData?.data?.products?.length ? (
-                    <Text style={productDetailsStyle.badgeText}>
-                      {cartData?.data?.products?.length}
-                    </Text>
-                  ) : (
-                    <Text>0</Text>
-                  )}
-                </Animated.View>
-              </TouchableOpacity>
-            )}
-          </Animated.View>
           <Animated.View entering={FadeInRight.duration(500).delay(50)}>
             <TouchableOpacity
               onPress={() => {
@@ -340,6 +319,9 @@ const ProductDetails: React.FC<IProduct> = (props) => {
               )}
               {/* <FavIcon /> */}
             </TouchableOpacity>
+          </Animated.View>
+          <Animated.View entering={FadeInRight.duration(500).delay(50)}>
+            <HeaderCartIcon />
           </Animated.View>
         </View>
       </View>
@@ -490,9 +472,22 @@ related product ends here
               handleAddToCart(productData);
               animatedCartCounter();
             }}
-            style={productDetailsStyle.cartButton}>
-            <Text style={productDetailsStyle.addTorCartText}>Add To Cart</Text>
-            <CartBag />
+            style={[
+              productDetailsStyle.cartButton,
+              { backgroundColor: selectedVariant?.inStock <= 0 ? 'rgba(0,0,0,0.1)' : '#FFF2F7' },
+            ]}>
+            <Text
+              style={[
+                productDetailsStyle.addTorCartText,
+                { color: selectedVariant?.inStock <= 0 ? 'rgba(0,0,0,0.3)' : Color.C_black_eight },
+              ]}>
+              Add To Cart
+            </Text>
+            <Ionicons
+              name="bag-handle-outline"
+              size={20}
+              color={selectedVariant?.inStock <= 0 ? 'rgba(0,0,0,0.3)' : Color.C_black_eight}
+            />
           </TouchableOpacity>
           <Animated.View style={[productDetailsStyle.quantityAnimCon, animatedStyle]}>
             <Text style={productDetailsStyle.badgeText}>+1</Text>

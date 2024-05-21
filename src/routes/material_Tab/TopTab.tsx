@@ -19,7 +19,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Printer from '../../components/productsCategory/Printer/Printer';
 import Cartridge from '../../components/productsCategory/Cartridge/Cartridge';
 import Ink from '../../components/productsCategory/Ink/Ink';
-import { Color } from '../../constants/GlobalStyle';
+import { Color, Font } from '../../constants/GlobalStyle';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import ProductAll from '../../components/productsCategory/All/Product.all';
 
@@ -39,12 +39,14 @@ export const TopTab = ({ brandName, searchText }: { brandName: any; searchText: 
           },
           tabBarActiveTintColor: Color.C_main,
           tabBarInactiveTintColor: '#9E9E9E',
-          tabBarItemStyle: { width: 115 },
-          tabBarLabelStyle: { fontSize: 16, textTransform: 'capitalize', width: 100 },
+          tabBarItemStyle: { width: 90 },
+          tabBarLabelStyle: { fontSize: Font.Font_M, textTransform: 'capitalize', width: 100 },
           tabBarIndicatorStyle: {
             backgroundColor: Color.C_main, // Color of the indicator line
             height: 1, // Height of the indicator line
-            borderRadius: 10, // Border radius of the indicator line
+            borderRadius: 10,
+            width: 80,
+            left: '1.5%', // Border radius of the indicator line
           },
         }}>
         {/* =============================== */}

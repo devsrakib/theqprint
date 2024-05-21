@@ -28,9 +28,6 @@ export const productsStyle = StyleSheet.create({
   cartBag: {
     width: 40,
     height: 40,
-    borderRadius: 25,
-    borderColor: Color.C_border,
-    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 40,

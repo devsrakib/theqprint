@@ -45,6 +45,7 @@ const MyCart = () => {
   const [originalTotalPrice, setOriginalTotalPrice] = useState(0);
   const { data, setRefetch: progressRefetch } = useGetDeliveryState();
   const mycartOrderItem = 'myCartOrderItem';
+  console.log(data?.data?.isFreeShippingActive, ':::::::::::::');
 
   const { cart: cartData } = useContext(CartItemContext);
   // useEffect(() => {
@@ -101,7 +102,6 @@ const MyCart = () => {
     }
     return totalPrice;
   });
-  console.log(productPriceArray);
 
   const originalPrice = cartData?.data?.products?.map((product: any) => {
     // setOrderQuantity(product?.orderQuantity)
@@ -175,39 +175,46 @@ const MyCart = () => {
       {cartData?.data?.products?.length !== 0 && (
         <View style={myCartStyle.totalPriceAndProgressCon}>
           {/* Display the grand total */}
-          <View style={myCartStyle.grandTotalCon}>
-            <Text>Grand Total</Text>
-            <Text>
-              {discountedTotal?.toFixed(2)} <Text>QAR</Text>
-            </Text>
-          </View>
+          {data?.data?.isFreeShippingActive && (
+            <View style={{ paddingBottom: 20 }}>
+              <View style={myCartStyle.grandTotalCon}>
+                <Text>Grand Total</Text>
+                <Text>
+                  {discountedTotal?.toFixed(2)} <Text>QAR</Text>
+                </Text>
+              </View>
 
-          {/* Display the progress bar */}
-          <View style={{ position: 'relative' }}>
-            <View style={myCartStyle.customProgressBG}>
-              <Animated.View style={progressStyle}>
-                <View style={myCartStyle.percentageValueCon}>
-                  {discountedTotal >= targetedAmount ? (
-                    <Text style={{ fontSize: 12 }}>100</Text>
-                  ) : (
-                    <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
-                  )}
+              {/* Display the progress bar */}
+              <View style={{ position: 'relative' }}>
+                <View style={myCartStyle.customProgressBG}>
+                  <Animated.View style={progressStyle}>
+                    <View style={myCartStyle.percentageValueCon}>
+                      {discountedTotal >= targetedAmount ? (
+                        <Text style={{ fontSize: 12 }}>100</Text>
+                      ) : (
+                        <Text style={{ fontSize: 12 }}>{percentageProgress}</Text>
+                      )}
+                    </View>
+                  </Animated.View>
                 </View>
-              </Animated.View>
-            </View>
-          </View>
+              </View>
 
-          {/* Display information about free shipping */}
-          {discountedTotal >= targetedAmount ? (
-            <View style={myCartStyle.congratsMessageCon}>
-              <AntDesign name="checkcircleo" size={16} color={Color.C_green} />
-              <Text style={myCartStyle.congratsText}>Congratulation! You got free shipping</Text>
+              {/* Display information about free shipping */}
+              {discountedTotal >= targetedAmount ? (
+                <View style={myCartStyle.congratsMessageCon}>
+                  <AntDesign name="checkcircleo" size={16} color={Color.C_green} />
+                  <Text style={myCartStyle.congratsText}>
+                    Congratulation! You got free shipping
+                  </Text>
+                </View>
+              ) : (
+                <Text style={myCartStyle.freeShippingText}>
+                  Spend{' '}
+                  <Text style={{ color: '#C83B62', fontWeight: '600' }}>{targetedAmount}</Text> more
+                  to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
+                </Text>
+              )}
             </View>
-          ) : (
-            <Text style={myCartStyle.freeShippingText}>
-              Spend <Text style={{ color: '#C83B62', fontWeight: '600' }}>{targetedAmount}</Text>{' '}
-              more to reach <Text style={{ color: '#000' }}>FREE SHIPPING!</Text>
-            </Text>
           )}
 
           {/* Display the button to proceed to checkout */}

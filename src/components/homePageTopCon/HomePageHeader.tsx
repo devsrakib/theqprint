@@ -1,30 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from 'react';
 import { View, Image, TouchableOpacity } from 'react-native';
-import { Badge } from 'react-native-paper';
 
 import { homePageStyle } from './HomePageHeaderStyle';
-import { CartBag } from '../../../assets/allSvg/AllSvg';
-import { CartItemContext } from '../../Providers/CartItemProvider';
+import HeaderCartIcon from '../common/commonHeader/HeaderCartIcon';
 
 const HomePageTopCon = () => {
-  const navigation: any = useNavigation();
-  const { cart } = useContext(CartItemContext);
-
   return (
     <View style={homePageStyle.container}>
       <Image style={homePageStyle.logo} source={require('../../../assets/image/logo.png')} />
-      {cart?.data === null ? null : (
-        <TouchableOpacity
-          onPress={() => navigation.navigate('MyCart')}
-          activeOpacity={0.7}
-          style={homePageStyle.cart}>
-          <CartBag />
-          <Badge style={homePageStyle.badge}>
-            {cart?.data?.products?.length ? cart?.data?.products?.length : '0'}
-          </Badge>
-        </TouchableOpacity>
-      )}
+      <HeaderCartIcon />
     </View>
   );
 };

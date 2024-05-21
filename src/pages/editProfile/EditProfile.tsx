@@ -249,7 +249,9 @@ import { editProfileStyle } from './EditProfileStyle'; // Edit profile style
 import EditProfileTopTab from '../../routes/material_Tab/EditProfileTopTab'; // Assuming you have a top tab component for editing profile
 import { useNavigation } from '@react-navigation/native';
 
-const EditProfile = () => {
+const EditProfile = (props: any) => {
+  const item = props?.route?.params;
+
   const navigation = useNavigation();
   const { data, setRefetch } = useUser();
   const [collectedProfilePhoto, setCollectedProfilePhoto] = useState(null);
@@ -302,24 +304,23 @@ const EditProfile = () => {
   };
 
   const uploadImage = async () => {
+    const image = {
+      uri: selectedImage,
+      name: 'profile.jpg',
+      type: 'image/jpeg',
+    };
     try {
       const formData = new FormData();
-      formData.append(
-        'profilePhoto',
-        JSON.stringify({
-          uri: selectedImage,
-          name: 'profile.jpg',
-          type: 'image/jpeg',
-        })
-      );
+      formData.append('profilePhoto', image);
 
-      const response = await axios.put('https://api.theqprint.com/api/v1/user/update', formData, {
+      const response = await axios.put(`${mainUrl}api/v1/user/update`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${accessToken}`,
         },
       });
       if (response?.data) {
+        setRefetch((prev) => prev + 1);
         ToastAndroid.show('Profile updated successfully!', ToastAndroid.TOP);
       }
     } catch (error) {
@@ -333,6 +334,7 @@ const EditProfile = () => {
       setRefetch((prev) => prev + 1);
     }
   }, [selectedImage]);
+  // console.log('::::::::', JSON.stringify(data?.data?.profilePhoto, null, 2));
 
   return (
     <View style={{ flex: 1 }}>

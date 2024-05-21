@@ -1015,7 +1015,6 @@ export const useUpdateCart = () => {
         },
       });
       const result = await response.json();
-      console.log(result);
 
       if (!response.ok) {
         throw new Error('Network response was not ok');

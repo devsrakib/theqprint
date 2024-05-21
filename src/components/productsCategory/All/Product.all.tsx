@@ -5,7 +5,6 @@ import Cart from '../../card/allCart/Cart';
 import AllProductSkeleton from '../../skeleton/allProduct.skeleton';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import { Color } from '../../../constants/GlobalStyle';
-import { useGetQueryProductQuery } from '../../../redux/api/productSlice';
 import EmptyData from '../../common/EmptyData';
 import { CustomScrollView } from '../../../shared/CustomTouchable';
 import { useProductQuery } from '../../../hooks/allHooks';

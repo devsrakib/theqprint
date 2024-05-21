@@ -7,7 +7,7 @@ export const productDetailsStyle = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0, 0, 0, 0.10)',
-    backgroundColor: 'rgba(200, 59, 98, 0.06)',
+    // backgroundColor: 'rgba(200, 59, 98, 0.06)',
     // backgroundColor: 'black',
   },
   navigationAndFavCon: {
@@ -16,7 +16,7 @@ export const productDetailsStyle = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     width: '100%',
-    height: 80,
+    height: 60,
     // paddingTop: 40,
     // backgroundColor: 'rgba(200, 59, 98, 0.06)',
     backgroundColor: Color.C_white,
@@ -45,11 +45,8 @@ export const productDetailsStyle = StyleSheet.create({
     height: 34,
     width: 34,
     backgroundColor: '#fff',
-    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: Color.C_border,
-    borderWidth: 1,
   },
 
   quantityAnimCon: {
@@ -126,7 +123,6 @@ export const productDetailsStyle = StyleSheet.create({
     alignItems: 'center',
   },
   BuyNowButtonAndAddToCartCon: {
-    height: 130,
     position: 'absolute',
     bottom: 0,
     backgroundColor: Color.C_white,
@@ -154,7 +150,8 @@ export const productDetailsStyle = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: 15,
+    marginTop: 8,
+    // marginTop: 'auto',
   },
   linearButton: {
     height: 50,
@@ -197,7 +194,7 @@ export const productDetailsStyle = StyleSheet.create({
   //   alignSelf: 'center',
   // },
   realatedProductCon: {
-    marginBottom: 80,
+    marginBottom: 50,
     backgroundColor: Color.C_white,
     marginTop: 5,
     paddingBottom: 100,

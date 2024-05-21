@@ -148,11 +148,12 @@ const EditUserInfo = () => {
       setPhoneNumber(data?.data?.phoneNumber);
     }
   }, [data]);
-  console.log(data);
 
   return (
     <View style={styles.bodyContainer}>
-      <ScrollView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 50 }}>
         <Text style={styles.label}>Name</Text>
         <TextInput
           style={styles.input}
@@ -193,7 +194,6 @@ const EditUserInfo = () => {
             ))}
           <Text style={styles.updatePassText}>Update password</Text>
         </View>
-        <Divider style={styles.dividerStyle} />
         <Text style={[styles.label, { color: passError ? 'red' : 'lightgray' }]}>
           {passError ? passError : 'old password'}
         </Text>

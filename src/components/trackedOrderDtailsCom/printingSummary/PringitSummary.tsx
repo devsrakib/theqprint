@@ -10,9 +10,6 @@ import { useGetOnlineOrder } from '~/hooks/allHooks';
 
 const PringitSummary = ({ item }: { item: any }) => {
   const { data: NData } = useGetOnlineOrder('');
-  // const NData = notification?.data[0];
-  console.log(NData);
-
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(200)} style={styles.container}>
       <Text style={[styles.commonText, { marginLeft: 20 }]}>Shopping Items</Text>

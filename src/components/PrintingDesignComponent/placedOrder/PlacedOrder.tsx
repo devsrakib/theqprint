@@ -18,10 +18,11 @@ const TotalOrderComponent = ({
 }) => {
   const navigation: any = useNavigation();
   const sourcePage = 'CustomPrinting';
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   // const submitAndroute = () => {
   //   handleSubmit();
   // };
+  console.log(buttonDisabled);
 
   const increaseQuantity = () => {
     setPrintQuantity((printQuantity += 1));
@@ -32,19 +33,26 @@ const TotalOrderComponent = ({
       setPrintQuantity((printQuantity -= 1));
     }
   };
+  console.log(jsonData?.printingRequestFile);
+  console.log(jsonData?.paperTypeId);
+  console.log(jsonData?.printingColorMode);
+  console.log(jsonData?.singlePrice);
+  console.log(jsonData?.totalPrice);
 
-  console.log(jsonData);
   useEffect(() => {
     if (
       jsonData?.printingRequestFile === undefined &&
       jsonData?.paperTypeId === undefined &&
-      jsonData?.printingColorMode === undefined
+      jsonData?.printingColorMode === undefined &&
+      jsonData?.singlePrice === undefined &&
+      jsonData?.totalPrice === undefined
     ) {
-      setButtonDisabled(true);
-    } else {
       setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
     }
   }, [jsonData]);
+
   return (
     <View style={placedOrderStyle.container}>
       {/* <Text>

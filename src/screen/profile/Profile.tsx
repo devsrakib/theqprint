@@ -66,11 +66,12 @@ const Profile: React.FC = () => {
     isLoading,
     setRefetch: reviewRefetch,
   } = useGetOnlineReveiwById(data?.data?._id);
-  const [reviewFetched, setReviewFetched] = useState(false);
   const orderNotReviewedItem = review?.data?.map((item: any) =>
     item?.orderItems?.filter((i: any) => !i?.isReviewed)
   );
-
+  useEffect(() => {
+    setRefetch((prev) => prev + 1);
+  }, []);
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
@@ -126,7 +127,6 @@ const Profile: React.FC = () => {
   const saveImage = async (image: any) => {
     try {
       // update displayed image
-      setImage(image);
       setIsCameraModalOpen(false);
     } catch (error) {
       throw error;
@@ -176,9 +176,7 @@ const Profile: React.FC = () => {
         {/* Profile section */}
         <View style={profileStyle.profileCon}>
           {/* Edit profile button */}
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => navigation.navigate('EditProfile', { ...data })}>
+          <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('EditProfile')}>
             <EditIcon />
           </TouchableOpacity>
           {/* User image */}
