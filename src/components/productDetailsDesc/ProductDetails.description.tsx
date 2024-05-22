@@ -14,6 +14,8 @@ const ProductDetailsDesc = ({
   setSelectedVariant,
   quantity,
   currentIndex,
+  setProductImages,
+  productImages,
 }: {
   data: IProduct;
   selectedVariant: any;
@@ -21,13 +23,22 @@ const ProductDetailsDesc = ({
   quantity: number;
   setQuantity: Function;
   currentIndex: number;
+  setProductImages: Function;
+  productImages: any;
 }) => {
   const [selectedVariantId, setSelectedVariantId] = useState<string>('');
   const [selectedVariantPrice, setSelectedVariantPrice] = useState<number | undefined>(undefined);
-  const handleColor = (variant: any) => {
+
+  const handleVariantSelect = (variant: any) => {
     setSelectedVariant(variant);
     setSelectedVariantId(variant?._id);
+    if (variant?.variantPhotos?.length > 0) {
+      setProductImages([...variant.variantPhotos]);
+    } else {
+      setProductImages(data?.productPhotos || []);
+    }
   };
+  // console.log(data?.productPhotos);
 
   useEffect(() => {
     if (selectedVariant) {
@@ -78,12 +89,11 @@ const ProductDetailsDesc = ({
   } else {
     percentage = disCountePercentage;
   }
-  const photos = data?.productPhotos || [];
 
   return (
     <View style={styles.description}>
       <View style={styles.paginationCon}>
-        {photos?.map((_: any, index: number) => {
+        {productImages?.map((_: any, index: number) => {
           return (
             <View
               key={index.toString()}
@@ -148,7 +158,7 @@ const ProductDetailsDesc = ({
         {data?.variants?.map((variant: any, index: any) => {
           return (
             <TouchableOpacity
-              onPress={() => handleColor(variant)}
+              onPress={() => handleVariantSelect(variant)}
               key={index.toString()}
               style={[
                 styles.colorIndicator,

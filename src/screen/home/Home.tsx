@@ -156,7 +156,6 @@ const Home = () => {
         {/* StatusBar */}
         <StatusBar style="dark" />
       </View>
-      <NetworkStatus />
     </View>
   );
 };

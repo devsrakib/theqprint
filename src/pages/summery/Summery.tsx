@@ -53,7 +53,6 @@ import { ICartData } from '../productDetailsPage/ProductDetails';
 const Summery: React.FC = (props) => {
   //@ts-ignore
   const item = props?.route?.params;
-  console.log(item);
 
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);

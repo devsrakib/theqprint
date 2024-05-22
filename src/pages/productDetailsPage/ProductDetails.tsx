@@ -73,6 +73,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [productImages, setProductImages] = useState<IProduct[]>(productData?.productPhotos || []);
   const [accessToken, setAccessToken] = useState<string>('');
   const [isFavItem, setIsFavItem] = useState<boolean>(false);
   const [loader, setLoader] = useState(false);
@@ -289,6 +290,20 @@ const ProductDetails: React.FC<IProduct> = (props) => {
     setRefetch((prev) => prev + 1);
     setRefreshing(false);
   };
+  const variantsPhotos = productData?.variants?.map((p: any) => p?.variantPhotos);
+  useEffect(() => {
+    // Update productImages whenever selectedVariant changes
+    // if (variantsPhotos?.length === 0) {
+    if (variantsPhotos?.[0]?.length > 0) {
+      setProductImages([...productData?.productPhotos, ...variantsPhotos]);
+    } else {
+      setProductImages(productData?.productPhotos || []);
+    }
+    // } else {
+    //   setProductImages(productData?.productPhotos || []);
+    // }
+  }, [productData]);
+
   // Return JSX
   return (
     <SafeAreaView style={{ height: screenHeight }}>
@@ -344,11 +359,7 @@ const ProductDetails: React.FC<IProduct> = (props) => {
                 }}
                 showsHorizontalScrollIndicator={false}
                 style={{ height: 280, width: '100%' }}
-                data={
-                  selectedVariant?.isDefault === true
-                    ? productData?.productPhotos
-                    : selectedVariant?.variantPhotos
-                }
+                data={productImages}
                 renderItem={({ item: img }) => {
                   return (
                     <>
@@ -388,6 +399,8 @@ const ProductDetails: React.FC<IProduct> = (props) => {
             quantity={quantity}
             setQuantity={setQuantity}
             currentIndex={currentIndex}
+            setProductImages={setProductImages}
+            productImages={productImages}
           />
         ) : (
           <DetailsSkeleton />
