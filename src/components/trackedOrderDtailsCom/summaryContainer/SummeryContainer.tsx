@@ -20,10 +20,8 @@ const SummeryContainer = ({ data }: { data: any }) => {
       </View>
       {/* ================== */}
       <View style={summerContainerStyle.infoCon}>
-        <Text style={summerContainerStyle.leftText}>
-          Discount <Text style={summerContainerStyle.smallText}>(15%)</Text>
-        </Text>
-        <Text>QR {data?.totalDiscount}.00</Text>
+        <Text style={summerContainerStyle.leftText}>Discount</Text>
+        <Text>QR {data?.totalDiscount.toFixed(2)}</Text>
       </View>
       {/* ================== */}
       <View style={summerContainerStyle.infoCon}>

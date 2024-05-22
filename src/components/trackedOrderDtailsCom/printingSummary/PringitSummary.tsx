@@ -37,7 +37,7 @@ const PringitSummary = ({ item }: { item: any }) => {
         <View style={styles.commontContainer}>
           <Text style={styles.commonText}>Total</Text>
           <Text style={styles.totalAmount}>
-            {item?.totalPayable || NData?.totalPayable} <Text>QAR</Text>
+            {item?.totalPayable?.toFixed(2) || NData?.totalPayable.toFixed(2)} <Text>QAR</Text>
           </Text>
         </View>
       </View>

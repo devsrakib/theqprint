@@ -53,6 +53,7 @@ import { ICartData } from '../productDetailsPage/ProductDetails';
 const Summery: React.FC = (props) => {
   //@ts-ignore
   const item = props?.route?.params;
+  console.log(item);
 
   const navigation: any = useNavigation();
   const [isDown, setIsDown] = useState<boolean>(false);
@@ -396,7 +397,7 @@ const Summery: React.FC = (props) => {
   };
 
   const error = errorMessage || printingMessage;
-  const prices = item?.variant?.sellingPrice || item?.originalTotalPrice || item?.singlePrice;
+  const prices = item?.variant?.sellingPrice || item?.originalTotalPrice || item?.totalPrice;
   const discount = prices - grandTotal;
   const grandTotalPrice = grandTotal + deliveryFee;
 

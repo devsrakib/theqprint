@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Platform, ToastAndroid } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { orderAndPrinterDesignStyle } from '../../../pages/custom_order/CustomOrderStyle';
 import { placedOrderStyle } from './PlacedOrderStyle';
@@ -22,7 +22,6 @@ const TotalOrderComponent = ({
   // const submitAndroute = () => {
   //   handleSubmit();
   // };
-  console.log(buttonDisabled);
 
   const increaseQuantity = () => {
     setPrintQuantity((printQuantity += 1));
@@ -33,23 +32,20 @@ const TotalOrderComponent = ({
       setPrintQuantity((printQuantity -= 1));
     }
   };
-  console.log(jsonData?.printingRequestFile);
-  console.log(jsonData?.paperTypeId);
-  console.log(jsonData?.printingColorMode);
-  console.log(jsonData?.singlePrice);
-  console.log(jsonData?.totalPrice);
 
   useEffect(() => {
     if (
-      jsonData?.printingRequestFile === undefined &&
-      jsonData?.paperTypeId === undefined &&
-      jsonData?.printingColorMode === undefined &&
-      jsonData?.singlePrice === undefined &&
-      jsonData?.totalPrice === undefined
+      jsonData?.paperSize?.height === 0 ||
+      jsonData?.paperSize?.width === 0 ||
+      !jsonData?.printingRequestFile ||
+      !jsonData?.paperTypeId ||
+      !jsonData?.printingColorMode ||
+      !jsonData?.singlePrice ||
+      !jsonData?.totalPrice
     ) {
-      setButtonDisabled(false);
-    } else {
       setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
     }
   }, [jsonData]);
 
@@ -94,7 +90,7 @@ const TotalOrderComponent = ({
       <View style={placedOrderStyle.totalPriceCon}>
         <Text style={placedOrderStyle.totalPrice}>Total Price</Text>
         <Text style={placedOrderStyle.price}>
-          {jsonData.totalPrice} <Text style={placedOrderStyle.currency}>QAR</Text>
+          {jsonData?.totalPrice} <Text style={placedOrderStyle.currency}>QAR</Text>
         </Text>
       </View>
       <LinearGradient
@@ -103,9 +99,12 @@ const TotalOrderComponent = ({
         end={{ x: 1, y: 1 }}
         style={placedOrderStyle.button}>
         <TouchableOpacity
-          disabled={buttonDisabled}
           onPress={() => {
-            navigation.navigate('Summery', { ...jsonData, source: sourcePage });
+            if (buttonDisabled) {
+              return ToastAndroid.show('please fill the all field', ToastAndroid.LONG);
+            } else {
+              navigation.navigate('Summery', { ...jsonData, source: sourcePage });
+            }
           }}
           activeOpacity={0.7}
           style={placedOrderStyle.actionLayer}>

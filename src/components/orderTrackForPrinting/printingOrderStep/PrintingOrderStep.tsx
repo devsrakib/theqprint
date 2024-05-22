@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Calender,
   Clock,
@@ -10,198 +10,99 @@ import {
   Track,
 } from '../../../../assets/allSvg/AllSvg';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { IOrder, IOrderStatus } from '../../../types/interfaces/orderHistory.interface';
 import { calculateEstimatedTime } from '../../../utils/calculateEstimatedTime';
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
 
 const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function }) => {
   const lightGray = 'lightgray';
+  const [stepStatus, setStepStatus] = useState('');
 
-  const statusColors = data?.orderStatus?.map((status: any) => status?.status);
+  const statusColors = data?.orderStatus?.map((status: any) => status?.status) || [];
+
   useEffect(() => {
-    setStatus(statusColors?.includes('Printing'));
-  }, [statusColors]);
+    setStatus(statusColors.includes('Printing'));
+    if (statusColors) {
+      const printingStatus = data?.orderStatus.find((status: any) => status?.status === 'Printing');
+      setStepStatus(printingStatus ? printingStatus.status : '');
+    }
+  }, [statusColors, data?.orderStatus]);
+
+  const statuses = data?.orderStatus || [];
+  const times = statuses.map((status: any) => status?.time);
+
+  const allStatuses = [
+    { status: 'Order placed', icon: <NoteBookIcon />, subState: 'Your order has been placed' },
+    {
+      status: 'Printing',
+      icon: <PackageIcon />,
+      subState: 'Your Order Is ready to prepared by the Seller',
+    },
+    {
+      status: 'Shipping',
+      icon: <DeliveryCarIcon />,
+      subState: 'Order has been shipped to your address',
+    },
+    {
+      status: 'Delivered',
+      icon: <HandshackIcon />,
+      subState: 'Great! Order has been received by you.',
+    },
+  ];
+
   return (
     <Animated.View entering={FadeInDown.delay(50).duration(500)} style={styles.container}>
-      {/* step indicator container */}
-      {/* order placed */}
       <View style={styles.indicatorCon}>
-        {/* indicator */}
-        {/* order placed  */}
-        <View
-          style={[
-            styles.indicatorBox,
-            {
-              backgroundColor: statusColors?.includes('Order placed') ? 'red' : lightGray,
-            },
-          ]}>
-          <NoteBookIcon />
-        </View>
-        {/* related vertical divider */}
-        <View
-          style={[
-            styles.relatedDivider,
-            {
-              backgroundColor: statusColors?.includes('Order placed') ? 'red' : lightGray,
-            },
-          ]}
-        />
-        {/* indicator */}
-        {/* packaging */}
-        <View
-          style={[
-            styles.indicatorBox,
-            {
-              backgroundColor: statusColors?.includes('Packaging') ? 'red' : lightGray,
-            },
-          ]}>
-          <PackageIcon />
-        </View>
-        {/* related vertical divider */}
-        <View
-          style={[
-            styles.relatedDivider,
-            {
-              backgroundColor: statusColors?.includes('Packaging') ? 'red' : lightGray,
-            },
-          ]}
-        />
-        {/* indicator */}
-        {/* shipping */}
-        <View
-          style={[
-            styles.indicatorBox,
-            {
-              backgroundColor: statusColors?.includes('Shipping') ? 'red' : lightGray,
-            },
-          ]}>
-          <DeliveryCarIcon />
-        </View>
-        {/* related vertical divider */}
-        <View
-          style={[
-            styles.relatedDivider,
-            {
-              backgroundColor: statusColors?.includes('Shipping') ? 'red' : lightGray,
-            },
-          ]}
-        />
-        {/* indicator */}
-        <View
-          style={[
-            styles.indicatorBox,
-            {
-              backgroundColor: statusColors?.includes('Delivered') ? 'red' : lightGray,
-            },
-          ]}>
-          <HandshackIcon />
-        </View>
+        {allStatuses.map((item, index) => (
+          <React.Fragment key={index}>
+            <View
+              style={[
+                styles.indicatorBox,
+                {
+                  backgroundColor: statusColors.includes(item.status) ? 'red' : lightGray,
+                },
+              ]}>
+              {item.icon}
+            </View>
+            {index < allStatuses.length - 1 && (
+              <View
+                style={[
+                  styles.relatedDivider,
+                  {
+                    backgroundColor: statusColors.includes(item.status) ? 'red' : lightGray,
+                  },
+                ]}
+              />
+            )}
+          </React.Fragment>
+        ))}
       </View>
-      {/* step details container */}
+
       <View style={styles.stepDetailsCon}>
-        {/* step details */}
-        <View style={styles.stepDetails}>
-          {/* order state */}
-          {/* <View style={styles.dateCon}>
-            {
-              <>
-                <Clock />
-                <Text style={styles.dateText}>
-                  {calculateEstimatedTime(data?.orderStatus[0].time)}
-                </Text>
-              </>
-            }
-          </View> */}
-          <View style={styles.stepDetails}>
-            {/* order state */}
+        {allStatuses.map((item, index) => (
+          <View key={index} style={styles.stepDetails}>
             <View style={styles.dateCon}>
-              {
-                <>
-                  <Clock />
-                  <Text style={styles.dateText}>
-                    {calculateEstimatedTime(data?.orderStatus[0]?.time)}
-                  </Text>
-                </>
-              }
+              <Clock />
+              <Text style={styles.dateText}>{calculateEstimatedTime(times[index])}</Text>
             </View>
             <View>
-              <Text style={[styles.state]}>Order Placed</Text>
-              <Text style={styles.subState}>Your order has been placed</Text>
-            </View>
-          </View>
-        </View>
-        {/* ======================================== */}
-        <View style={styles.stepDetails}>
-          {/* order state */}
-          {data?.orderStatus[0]?.time && (
-            <View style={styles.dateCon}>
-              <Clock />
-              <Text style={styles.dateText}>
-                {calculateEstimatedTime(data?.orderStatus[0]?.time)}
+              <Text
+                style={[
+                  styles.state,
+                  { color: statusColors.includes(item.status) ? 'black' : 'gray' },
+                ]}>
+                {item.status}
               </Text>
+              <Text style={styles.subState}>{item.subState}</Text>
             </View>
-          )}
-          <View>
-            <Text
-              style={[
-                styles.state,
-                { color: statusColors?.includes('Printing') ? 'black' : 'gray' },
-              ]}>
-              Printing
-            </Text>
-            <Text style={styles.subState}>Your Order Is ready to prepared by the Seller.</Text>
           </View>
-        </View>
-        {/* =========================================== */}
-        <View style={styles.stepDetails}>
-          {/* order state */}
-          {data?.orderStatus[2]?.time && (
-            <View style={styles.dateCon}>
-              <Clock />
-              <Text style={styles.dateText}>
-                {calculateEstimatedTime(data?.orderStatus[2]?.time)}
-              </Text>
-            </View>
-          )}
-          <View>
-            <Text
-              style={[
-                styles.state,
-                { color: statusColors?.includes('Shipping') ? 'black' : 'gray' },
-              ]}>
-              To Ship
-            </Text>
-            <Text style={styles.subState}>Order has been shipping to your address</Text>
-          </View>
-        </View>
-        {/* ========================================== */}
-        <View style={styles.stepDetails}>
-          {/* order state */}
-          {data?.orderStatus[3]?.time && (
-            <View style={styles.dateCon}>
-              <Clock />
-              <Text style={styles.dateText}>
-                {calculateEstimatedTime(data?.orderStatus[3]?.time)}
-              </Text>
-            </View>
-          )}
-          <View>
-            <Text
-              style={[
-                styles.state,
-                { color: statusColors?.includes('Delivered') ? 'black' : 'gray' },
-              ]}>
-              Order Receive
-            </Text>
-            <Text style={styles.subState}>Great! Order has been received by you.</Text>
-          </View>
-        </View>
+        ))}
       </View>
     </Animated.View>
   );
 };
 
 export default PrintingOrderStep;
+
 const styles = StyleSheet.create({
   container: {
     padding: 20,

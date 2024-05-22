@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import { Color } from '../../../constants/GlobalStyle';
 import { FlatList } from 'react-native-gesture-handler';
 import PrintingDetailsCard from '../../../components/PrintiCard/PrintingDetailsCard';
-import { useGetAllPrintingByIdQuery } from '../../../redux/api/printingSlice';
 import { useGetAllPrinting, useUser } from '../../../hooks/allHooks';
 import OrderTrackSkeleton from '../../../components/skeleton/orderTrack.skeleton';
 import EmptyData from '../../../components/common/EmptyData';
@@ -11,7 +10,7 @@ import EmptyData from '../../../components/common/EmptyData';
 const Shipped = () => {
   const { data: userData } = useUser();
   const { data, isLoading, setRefetch } = useGetAllPrinting(
-    `buyer.userId=${userData?.data?._id}&orderStatus.status=Shipped`
+    `buyer.userId=${userData?.data?._id}&orderStatus.status=Shipping`
   );
   useEffect(() => {
     setRefetch((prev) => prev + 1);
