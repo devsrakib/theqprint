@@ -45,7 +45,6 @@ const MyCart = () => {
   const [originalTotalPrice, setOriginalTotalPrice] = useState(0);
   const { data, setRefetch: progressRefetch } = useGetDeliveryState();
   const mycartOrderItem = 'myCartOrderItem';
-  console.log(data?.data?.isFreeShippingActive, ':::::::::::::');
 
   const { cart: cartData } = useContext(CartItemContext);
   // useEffect(() => {

@@ -191,7 +191,6 @@ const Summery: React.FC = (props) => {
   }
 
   totalPrice = item?.variant?.sellingPrice;
-  // console.log(shippingState?.data?.isFreeShippingActive);
 
   let deliveryFee: number; // Assigning a default value
   if (shippingState?.data?.isFreeShippingActive === false) {
@@ -200,19 +199,11 @@ const Summery: React.FC = (props) => {
     }
   }
 
-  console.log(deliveryCharge?.data?.inside);
-
   if (formData?.state !== 'Doha' || location?.state !== 'Doha') {
     deliveryFee = deliveryCharge?.data?.outside || 0; // Adding default value here as well
   } else {
     deliveryFee = deliveryCharge?.data?.inside || 0;
   }
-
-  // if (targetedAmount && item?.discountedTotal && targetedAmount <= item?.discountedTotal) {
-  //   deliveryFee = 0;
-  // }
-
-  // console.log(deliveryFee, '_+_+_+_+_+_+_+_+_+_+_+_');
   let grandTotal: number = 0;
 
   if (item?.discountedTotal || item?.variant?.discountedPrice || item?.totalPrice) {
@@ -352,7 +343,8 @@ const Summery: React.FC = (props) => {
       defaultFormData.append('printingRequestFile', item?.printingRequestFile);
       defaultFormData.append('totalQuantity', item?.totalQuantity || totalQuantity);
 
-      const response = await fetch('https://api.theqprint.com/api/v1/printing-request/add', {
+      // const response = await fetch('https://api.theqprint.com/api/v1/printing-request/add', {
+      const response = await fetch('http://192.168.0.179:5000/api/v1/printing-request/add', {
         method: 'POST',
         body: defaultFormData,
         headers: {
@@ -372,6 +364,7 @@ const Summery: React.FC = (props) => {
         const result = await response.json();
       }
       const responseData = await response.json();
+
       if (responseData?.success) {
         setSuccessMessage(responseData?.success);
         navigation.navigate('confirmorder', { sellignPrice: item?.singlePrice });

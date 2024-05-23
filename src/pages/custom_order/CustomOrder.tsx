@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { View, Text, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
 import { orderAndPrinterDesignStyle } from './CustomOrderStyle';
@@ -27,6 +27,7 @@ const OrderAndPrinterDesignPage = () => {
   const [selectedPaperSize, setSelectedPaperSize] = useState<any>();
   const [bgColor, setBgColor] = useState<string>('');
   const [selectedPaperType, setSelectedPaperType] = useState<any>();
+  const [selectedFileName, setSelectedFineName] = useState<any>();
   const [selectedColorMode, setSelectedColorMode] = useState<any>();
   const { data: paperSize, isLoading: isSizeLoading } = useGetPrinting(
     'printingSetupType=Paper Size'
@@ -79,12 +80,19 @@ const OrderAndPrinterDesignPage = () => {
   const handleFilePick = async () => {
     try {
       const res = await DocumentPicker.getDocumentAsync();
+
       if (res?.assets && res?.assets?.length > 0) {
         const firstAsset = res?.assets[0];
-        if (firstAsset?.uri) {
-          const filename = firstAsset.uri.split('/').pop();
-          setSelectedFile(filename);
+
+        if (firstAsset?.name) {
+          setSelectedFineName(firstAsset?.name);
         }
+
+        setSelectedFile({
+          uri: firstAsset?.uri,
+          type: firstAsset?.mimeType,
+          name: firstAsset?.name,
+        });
       }
     } catch (err) {}
   };
@@ -99,6 +107,7 @@ const OrderAndPrinterDesignPage = () => {
     singlePrice: singlePrice,
     // totalPrintingPrice: totalPrintingPrice,
   };
+  console.log(jsonData);
 
   const clearSelectedPaperSize = () => {
     setBgColor(Color.C_border);
@@ -286,7 +295,7 @@ const OrderAndPrinterDesignPage = () => {
               style={paperTypeStyle.uploadButton}>
               <Upload />
               <Text style={paperTypeStyle.uploadButtonText}>
-                {selectedFile ? selectedFile?.slice(0, 20) + '...' : 'Upload file'}
+                {selectedFileName ? selectedFileName?.slice(0, 20) + '...' : 'Upload file'}
               </Text>
             </TouchableOpacity>
           </View>

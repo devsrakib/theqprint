@@ -38,7 +38,6 @@ const ProductDetailsDesc = ({
       setProductImages(data?.productPhotos || []);
     }
   };
-  // console.log(data?.productPhotos);
 
   useEffect(() => {
     if (selectedVariant) {

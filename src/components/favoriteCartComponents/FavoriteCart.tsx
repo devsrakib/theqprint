@@ -56,40 +56,6 @@ const FavoriteCart: React.FC<ListItemProps> = ({ item, viewableItems }) => {
     fetchAccessToken();
   }, []);
 
-  // const addRemoveFavorite = async (product: any) => {
-  //   const isAlreadyExistIndex = favoriteData?.data?.products?.findIndex(
-  //     (p: any) => p.productId === product.productId
-  //   );
-
-  //   let updateData;
-
-  //   if (favoriteData?.data && isAlreadyExistIndex !== -1) {
-  //     updateData = [
-  //       ...favoriteData?.data?.products.slice(0, isAlreadyExistIndex),
-  //       ...favoriteData?.data?.products.slice(isAlreadyExistIndex + 1),
-  //     ];
-  //   }
-
-  //   console.log(isAlreadyExistIndex, product._id);
-
-  //   const response = await fetch('https://api.theqprint.com/api/v1/wishlist/add', {
-  //     method: 'POST',
-  //     body: JSON.stringify({ products: updateData }),
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-  //   const result = await response.json();
-  //   console.log(result);
-
-  //   setRefetch((prev) => prev + 1);
-  // };
-
-  // useEffect(() => {
-  //   setRefetch((prev) => prev + 1);
-  // }, [favoriteData]);
-
   const addRemoveFavorite = async (product: any) => {
     setIndicator(true);
     try {

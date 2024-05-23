@@ -2,7 +2,6 @@ import { View, Text, FlatList } from 'react-native';
 import React, { useEffect } from 'react';
 import { Color } from '../../../constants/GlobalStyle';
 import PrintingDetailsCard from '../../../components/PrintiCard/PrintingDetailsCard';
-import { useGetAllPrintingByIdQuery } from '../../../redux/api/printingSlice';
 import { useGetAllPrinting, useUser } from '../../../hooks/allHooks';
 import OrderTrackSkeleton from '../../../components/skeleton/orderTrack.skeleton';
 import EmptyData from '../../../components/common/EmptyData';

@@ -80,10 +80,12 @@ const PrintingOrderStep = ({ data, setStatus }: { data: any; setStatus: Function
       <View style={styles.stepDetailsCon}>
         {allStatuses.map((item, index) => (
           <View key={index} style={styles.stepDetails}>
-            <View style={styles.dateCon}>
-              <Clock />
-              <Text style={styles.dateText}>{calculateEstimatedTime(times[index])}</Text>
-            </View>
+            {times[index] && (
+              <View style={styles.dateCon}>
+                <Clock />
+                <Text style={styles.dateText}>{calculateEstimatedTime(times[index])}</Text>
+              </View>
+            )}
             <View>
               <Text
                 style={[

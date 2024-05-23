@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, Platform, ToastAndroid } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { orderAndPrinterDesignStyle } from '../../../pages/custom_order/CustomOrderStyle';
+import { View, Text, TouchableOpacity, Platform, ToastAndroid } from 'react-native';
+
 import { placedOrderStyle } from './PlacedOrderStyle';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Divider } from 'react-native-paper';
@@ -101,7 +101,7 @@ const TotalOrderComponent = ({
         <TouchableOpacity
           onPress={() => {
             if (buttonDisabled) {
-              return ToastAndroid.show('please fill the all field', ToastAndroid.LONG);
+              return ToastAndroid.show('please fill all the field', ToastAndroid.LONG);
             } else {
               navigation.navigate('Summery', { ...jsonData, source: sourcePage });
             }
