@@ -298,7 +298,6 @@ const EditProfile = (props: any) => {
 
       setSelectedImage(resizedImage.uri);
     } catch (error) {
-      console.error('Failed to resize image:', error);
       Alert.alert('Resize failed', 'Failed to resize image. Please try again.');
     }
   };
@@ -306,8 +305,8 @@ const EditProfile = (props: any) => {
   const uploadImage = async () => {
     const image = {
       uri: selectedImage,
-      name: 'profile.jpg',
-      type: 'image/jpeg',
+      name: 'profile.png',
+      type: 'image/png',
     };
     try {
       const formData = new FormData();
