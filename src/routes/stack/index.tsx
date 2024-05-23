@@ -239,7 +239,6 @@ const Index = () => {
       // const accessToken = await isLoggedIn();
       const accessToken = await AsyncStorage.getItem('accessToken');
       // const accessToken = await AsyncStorage.getItem('verifyUser');
-      console.log(accessToken);
       const res = await fetch(mainUrl + 'api/v1/user/me', {
         method: 'GET',
         headers: {
