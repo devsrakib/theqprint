@@ -238,6 +238,8 @@ const Index = () => {
     const checkAccessToken = async () => {
       // const accessToken = await isLoggedIn();
       const accessToken = await AsyncStorage.getItem('accessToken');
+      // const accessToken = await AsyncStorage.getItem('verifyUser');
+      console.log(accessToken);
       const res = await fetch(mainUrl + 'api/v1/user/me', {
         method: 'GET',
         headers: {
@@ -246,7 +248,6 @@ const Index = () => {
       });
 
       const data = await res.json();
-
       if (data && data?.success) {
         if (data?.data?.isVerified) {
           setInitialRoute('BottomTab');

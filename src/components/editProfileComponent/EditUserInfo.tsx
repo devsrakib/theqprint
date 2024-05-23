@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import { Divider } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Color, Font } from '../../constants/GlobalStyle';
-import { useAppDispatch, useAppSelector } from '../../redux/hook';
 import { StatusBar } from 'expo-status-bar';
 import { STORAGE_KEY } from '../../constants/storageKey';
 import { getFromAsyncStorage } from '../../utils/local-storage';
