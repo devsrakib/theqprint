@@ -6,7 +6,7 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
     "ios": "expo run:ios",
-    "start": "expo start",
+    "start": "expo start --dev-client",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -19,18 +19,20 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.29",
     "axios": "^1.6.8",
+    "expo": "~51.0.31",
     "expo-device": "~6.0.2",
-    "expo-document-picker": "~12.0.1",
+    "expo-document-picker": "~12.0.2",
     "expo-file-system": "~17.0.1",
-    "expo-image-picker": "~15.0.5",
+    "expo-image-manipulator": "~12.0.5",
+    "expo-image-picker": "~15.0.7",
     "expo-linear-gradient": "~13.0.2",
-    "expo-notifications": "~0.28.3",
+    "expo-notifications": "~0.28.16",
     "expo-sharing": "~12.0.1",
     "expo-status-bar": "~1.12.1",
     "lodash": "^4.17.21",
     "lottie-react-native": "6.7.0",
     "react": "18.2.0",
-    "react-native": "0.74.1",
+    "react-native": "0.74.5",
     "react-native-config": "^1.5.1",
     "react-native-document-picker": "^9.2.0",
     "react-native-gesture-handler": "~2.16.1",
@@ -44,14 +46,13 @@
     "react-native-screens": "3.31.1",
     "react-native-shimmer-placeholder": "^2.0.9",
     "react-native-svg": "^15.2.0",
-    "react-native-tab-view": "^3.5.2",
-    "expo-image-manipulator": "~12.0.5",
-    "expo": "~51.0.8"
+    "react-native-tab-view": "^3.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/axios": "^0.14.0",
     "@types/react": "~18.2.14",
+    "@types/react-native": "^0.72.8",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "eslint": "^8.57.0",
@@ -62,7 +63,6 @@
   "eslintConfig": {
     "extends": "universe/native"
   },
-  "main": "node_modules/expo/AppEntry.js",
   "expo": {
     "install": {
       "exclude": [

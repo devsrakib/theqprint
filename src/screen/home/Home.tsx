@@ -34,12 +34,10 @@ import {
 } from '../../hooks/allHooks';
 import { CartItemContext } from '../../Providers/CartItemProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import NetworkStatus from '~/pages/internet/NoInternet';
 
 const Home = () => {
   const navigation: any = useNavigation();
   const { cart, setCart } = useContext(CartItemContext);
-  const [isHomeScreenActive, setIsHomeScreenActive] = useState(true);
   const { data: brandData, isLoading } = useBrand();
   // const { data: brandData, isLoading: isBrandLoading } = useGetBrandQuery(undefined);
   const { data: productData, isLoading: loadingProduct } = useProduct();
@@ -59,25 +57,25 @@ const Home = () => {
     </View>
   );
 
-  const handleBackPress = () => {
-    Alert.alert('Hold on!', 'Are you sure you want to go back?', [
-      {
-        text: 'Cancel',
-        onPress: () => null,
-        style: 'cancel',
-      },
-      { text: 'YES', onPress: () => BackHandler.exitApp() },
-    ]);
-    return true;
-  };
+  // const handleBackPress = () => {
+  //   Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+  //     {
+  //       text: 'Cancel',
+  //       onPress: () => null,
+  //       style: 'cancel',
+  //     },
+  //     { text: 'YES', onPress: () => BackHandler.exitApp() },
+  //   ]);
+  //   return true;
+  // };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     BackHandler.addEventListener('hardwareBackPress', handleBackPress);
 
-      return () => BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
-    }, [])
-  );
+  //     return () => BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+  //   }, [])
+  // );
   return (
     <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <View style={{ flex: 1, backgroundColor: Color.C_white }}>

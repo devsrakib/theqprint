@@ -45,7 +45,6 @@ import {
   ActiveProduct,
   ActiveUser,
 } from '../../../assets/allSvg/AllSvg';
-import { useUser } from '~/hooks/allHooks';
 import { mainUrl } from '~/constants/mainUrl';
 
 const Stack = createNativeStackNavigator();
@@ -101,7 +100,8 @@ const BottomTab = () => {
           headerTitleStyle: { marginTop: 30 },
         }}
         name="Home"
-        component={Home}></Tab.Screen>
+        component={Home}
+      />
       <Tab.Screen
         options={{
           headerShown: false,
@@ -234,32 +234,66 @@ const Index = () => {
 
   // const { data } = useUser();
 
+  // useEffect(() => {
+  //   const checkAccessToken = async () => {
+  //     // const accessToken = await isLoggedIn();
+  //     const accessToken = await AsyncStorage.getItem('accessToken');
+  //     // const accessToken = await AsyncStorage.getItem('verifyUser');
+  //     const res = await fetch(mainUrl + 'api/v1/user/me', {
+  //       method: 'GET',
+  //       headers: {
+  //         Authorization: `bearer ${accessToken}`,
+  //       },
+  //     });
+
+  //     const data = await res.json();
+  //     if (data && data?.success) {
+  //       if (data?.data?.isVerified) {
+  //         setInitialRoute('BottomTab');
+  //       } else {
+  //         navigation.navigate('login');
+  //       }
+  //     } else {
+  //       setInitialRoute('login');
+  //     }
+  //   };
+
+  //   checkAccessToken();
+  // }, [initialRoute]);
+
   useEffect(() => {
     const checkAccessToken = async () => {
-      // const accessToken = await isLoggedIn();
-      const accessToken = await AsyncStorage.getItem('accessToken');
-      // const accessToken = await AsyncStorage.getItem('verifyUser');
-      const res = await fetch(mainUrl + 'api/v1/user/me', {
-        method: 'GET',
-        headers: {
-          Authorization: `bearer ${accessToken}`,
-        },
-      });
-
-      const data = await res.json();
-      if (data && data?.success) {
-        if (data?.data?.isVerified) {
-          setInitialRoute('BottomTab');
-        } else {
-          navigation.navigate('login');
+      try {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        if (!accessToken) {
+          setInitialRoute('login');
+          return;
         }
-      } else {
-        setInitialRoute('login');
+
+        const res = await fetch(mainUrl + 'api/v1/user/me', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const data = await res.json();
+        if (data?.success) {
+          if (data?.data?.isVerified) {
+            setInitialRoute('BottomTab');
+          } else {
+            setInitialRoute('login');
+          }
+        } else {
+          setInitialRoute('login');
+        }
+      } catch (error) {
+        setInitialRoute('login'); // Fallback to login if error
       }
     };
 
     checkAccessToken();
-  }, [initialRoute]);
+  }, []);
 
   if (initialRoute === undefined) {
     return null;
@@ -268,7 +302,7 @@ const Index = () => {
   return (
     // {/* // <Stack.Navigator initialRouteName="SignUp"> */}
     // <Stack.Navigator initialRouteName={`OTP`}>
-    <Stack.Navigator initialRouteName={`${initialRoute}`}>
+    <Stack.Navigator initialRouteName={initialRoute}>
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />
