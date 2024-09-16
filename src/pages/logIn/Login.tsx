@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import Modal from 'react-native-modal';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -25,7 +25,7 @@ const Login = () => {
 
   const sourceForGotPass = 'sourceForGotPss';
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     setIndicator(true); // Start the loader
     try {
       const user = {
@@ -55,8 +55,8 @@ const Login = () => {
     } finally {
       setIndicator(false);
     }
-  };
-  const handleForgotPass = async () => {
+  }, []);
+  const handleForgotPass = useCallback(async () => {
     setIndicator(true); // Start the loader
     try {
       const email = {
@@ -81,7 +81,7 @@ const Login = () => {
     } finally {
       setIndicator(false);
     }
-  };
+  }, []);
 
   return (
     <View style={loginStyle.container}>
@@ -180,6 +180,7 @@ const Login = () => {
       <Modal
         onBackdropPress={() => setIsModalVisible(false)}
         onBackButtonPress={() => setIsModalVisible(false)}
+        backdropOpacity={0.4}
         swipeDirection="down"
         onSwipeComplete={() => setIsModalVisible(!isModalVisible)}
         isVisible={isModalVisible}

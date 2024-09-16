@@ -2,6 +2,7 @@ import { Svg, G, Path, Defs, ClipPath, Rect, Stop, LinearGradient, Circle } from
 import React from 'react';
 export const Bell = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <G clip-path="url(#clip0_248_507)">
         <Path
@@ -27,6 +28,7 @@ export const Bell = () => {
 };
 export const Magnify = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
       <G clip-path="url(#clip0_248_489)">
         <Path
@@ -54,6 +56,7 @@ export const Magnify = () => {
 };
 export const ThreeLine = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <G clip-path="url(#clip0_718_5109)">
         <Path
@@ -118,8 +121,7 @@ export const ThreeLine = () => {
           y1="6"
           x2="16.1019"
           y2="6.02675"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -129,8 +131,7 @@ export const ThreeLine = () => {
           y1="6.5"
           x2="12.1818"
           y2="6.92683"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -140,8 +141,7 @@ export const ThreeLine = () => {
           y1="6.5"
           x2="20.0993"
           y2="6.60693"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -151,8 +151,7 @@ export const ThreeLine = () => {
           y1="12"
           x2="10.1019"
           y2="12.0267"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -162,8 +161,7 @@ export const ThreeLine = () => {
           y1="12.5"
           x2="6.05068"
           y2="12.5267"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -173,8 +171,7 @@ export const ThreeLine = () => {
           y1="12.5"
           x2="20.2117"
           y2="13.1659"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -184,8 +181,7 @@ export const ThreeLine = () => {
           y1="18"
           x2="19.1019"
           y2="18.0267"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -195,8 +191,7 @@ export const ThreeLine = () => {
           y1="18.5"
           x2="15.2229"
           y2="19.305"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -206,8 +201,7 @@ export const ThreeLine = () => {
           y1="18.5"
           x2="20.0255"
           y2="18.5067"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -220,6 +214,7 @@ export const ThreeLine = () => {
 };
 export const CartIcon = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 18 19" fill="none">
       <G clip-path="url(#clip0_248_561)">
         <Path
@@ -257,6 +252,7 @@ export const CartIcon = () => {
 };
 export const FavIcon = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <Path
         d="M9.99961 17.5453C-6.66673 8.33354 4.99993 -1.66646 9.99961 4.65692C14.9999 -1.66646 26.6666 8.33354 9.99961 17.5453Z"
@@ -268,12 +264,12 @@ export const FavIcon = () => {
 export const ActiveFavIcon = () => {
   return (
     <Svg
+      //@ts-ignore
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
       viewBox="0 0 20 20"
-      fill="#1A1A1A"
-    >
+      fill="#1A1A1A">
       <Path
         d="M9.99961 17.5453C-6.66673 8.33354 4.99993 -1.66646 9.99961 4.65692C14.9999 -1.66646 26.6666 8.33354 9.99961 17.5453Z"
         stroke="#1A1A1A"
@@ -283,6 +279,7 @@ export const ActiveFavIcon = () => {
 };
 export const Goback = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
       <G clip-path="url(#clip0_304_1491)">
         <Path d="M5 12H19" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
@@ -299,6 +296,7 @@ export const Goback = () => {
 };
 export const HandIcon = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
       <Path
         d="M14.8452 0.646238C14.7993 0.599745 14.7445 0.562867 14.6842 0.537759C14.6239 0.512651 14.5591 0.499816 14.4938 0.500002C14.4284 0.500188 14.3638 0.513392 14.3036 0.538844C14.2434 0.564295 14.1889 0.601484 14.1432 0.648238C14.0509 0.744278 14.0001 0.872707 14.0016 1.00587C14.0031 1.13904 14.0568 1.26629 14.1512 1.36024C14.8705 2.08086 15.4125 2.95878 15.7344 3.92471C16.0563 4.89065 16.1494 5.91818 16.0062 6.92624C15.9871 7.05785 16.0205 7.19168 16.099 7.299C16.1775 7.40632 16.295 7.47857 16.4262 7.50024C16.4909 7.51042 16.557 7.50757 16.6206 7.49187C16.6842 7.47617 16.744 7.44794 16.7965 7.40882C16.849 7.3697 16.8932 7.32049 16.9265 7.26406C16.9597 7.20764 16.9814 7.14514 16.9902 7.08024C17.1557 5.91492 17.0481 4.72708 16.6759 3.61048C16.3036 2.49388 15.6769 1.4791 14.8452 0.646238ZM3.62319 2.53624C3.63781 2.17933 3.77145 1.83758 4.00281 1.56542C4.23417 1.29326 4.54995 1.10635 4.89985 1.03446C5.24975 0.962569 5.61364 1.00984 5.93357 1.16873C6.25349 1.32762 6.51104 1.589 6.66519 1.91124C6.86368 1.73385 7.10329 1.6088 7.36231 1.54739C7.62133 1.48599 7.89158 1.49019 8.14857 1.5596C8.40556 1.62901 8.64117 1.76144 8.83405 1.9449C9.02694 2.12836 9.171 2.35705 9.25319 2.61024L9.34119 2.87924C9.54202 2.71183 9.78081 2.59618 10.0367 2.54242C10.2925 2.48866 10.5577 2.49842 10.8089 2.57084C11.0601 2.64327 11.2898 2.77615 11.4778 2.95787C11.6657 3.13959 11.8063 3.36461 11.8872 3.61324V3.61424L12.9532 6.84424L13.5372 8.54824C13.9659 9.8009 14.096 11.1364 13.9172 12.4482L13.6472 14.4362C13.5885 14.868 13.4181 15.2769 13.1527 15.6224C12.8873 15.968 12.5362 16.2382 12.1342 16.4062L9.97619 17.3072C9.00519 17.7132 7.90819 17.4552 7.17219 16.7502C4.06219 13.7682 1.29319 12.7802 0.532194 12.5502C0.174194 12.4432 -0.131806 12.0312 0.058194 11.5782C0.208194 11.2232 0.568194 10.5992 1.34019 10.2582C1.93219 9.99524 2.70019 9.92824 3.68919 10.1902L1.76319 4.60524C1.632 4.20009 1.66634 3.7595 1.85874 3.37958C2.05113 2.99966 2.38597 2.71124 2.79019 2.57724C3.07019 2.48524 3.35619 2.47724 3.62319 2.53724V2.53624ZM5.77419 6.18324L6.32919 7.86124C6.35088 7.9238 6.35993 7.99005 6.3558 8.05614C6.35168 8.12222 6.33447 8.18683 6.30517 8.24622C6.27587 8.3056 6.23507 8.35857 6.18514 8.40206C6.13521 8.44554 6.07713 8.47868 6.01429 8.49954C5.95144 8.5204 5.88508 8.52857 5.81905 8.52357C5.75303 8.51858 5.68865 8.50052 5.62966 8.47044C5.57067 8.44036 5.51824 8.39887 5.47541 8.34836C5.43259 8.29786 5.40022 8.23935 5.38019 8.17624L4.81019 6.45624L3.86019 3.93624L3.85619 3.92624C3.80787 3.77361 3.70121 3.64625 3.55942 3.5719C3.41764 3.49754 3.25223 3.48221 3.09919 3.52924C2.94791 3.58107 2.82288 3.68998 2.75076 3.83271C2.67865 3.97544 2.66517 4.1407 2.71319 4.29324L4.97019 10.8402C5.00193 10.9318 5.00635 11.0307 4.98292 11.1248C4.95949 11.2188 4.90922 11.3041 4.83822 11.3701C4.76723 11.4361 4.67857 11.48 4.58305 11.4966C4.48752 11.5131 4.38925 11.5015 4.30019 11.4632C2.96819 10.8922 2.18719 10.9772 1.74519 11.1732C1.49417 11.2842 1.2801 11.4646 1.12819 11.6932C2.26219 12.0812 4.92819 13.2142 7.86419 16.0292C8.33819 16.4832 9.01719 16.6252 9.59119 16.3852L11.7482 15.4842C11.9896 15.3836 12.2005 15.2215 12.36 15.0142C12.5194 14.8068 12.6219 14.5614 12.6572 14.3022L12.9272 12.3152C13.0849 11.1574 12.9698 9.97873 12.5912 8.87324L12.0062 7.16624L12.0042 7.16124L10.9372 3.92624V3.92324C10.8913 3.77732 10.7914 3.65445 10.6579 3.57974C10.5244 3.50502 10.3675 3.4841 10.2191 3.52126C10.0707 3.55842 9.94212 3.65085 9.85961 3.77965C9.77711 3.90846 9.74691 4.06391 9.77519 4.21424L10.6302 6.84724C10.6672 6.97205 10.6541 7.10639 10.5937 7.22169C10.5332 7.33699 10.4301 7.42415 10.3064 7.46466C10.1827 7.50517 10.048 7.49581 9.93109 7.43859C9.81415 7.38137 9.72414 7.28079 9.68019 7.15824L9.67519 7.16024L8.84419 4.60324C8.8304 4.56042 8.81839 4.51705 8.80819 4.47324L8.30219 2.91824C8.24797 2.77348 8.13996 2.65523 8.00069 2.58815C7.86142 2.52107 7.70164 2.51033 7.55464 2.55816C7.40765 2.606 7.28479 2.70873 7.21168 2.84493C7.13856 2.98113 7.12084 3.14029 7.16219 3.28924L7.76419 5.14424C7.77619 5.18124 7.78419 5.21924 7.78719 5.25724L8.31419 6.84924C8.33481 6.91162 8.34294 6.97744 8.33812 7.04296C8.3333 7.10848 8.31561 7.17241 8.28609 7.2311C8.25656 7.28978 8.21576 7.34208 8.16602 7.385C8.11628 7.42792 8.05857 7.46062 7.99619 7.48124C7.93382 7.50186 7.86799 7.50998 7.80247 7.50516C7.73695 7.50034 7.67302 7.48266 7.61433 7.45313C7.55565 7.4236 7.50335 7.3828 7.46043 7.33306C7.41751 7.28332 7.38481 7.22562 7.36419 7.16324L5.79319 2.41324C5.74307 2.26206 5.63494 2.13699 5.4926 2.06554C5.35026 1.99409 5.18537 1.98211 5.03419 2.03224C4.88302 2.08236 4.75795 2.19049 4.6865 2.33283C4.61505 2.47517 4.60307 2.64006 4.65319 2.79124L5.75519 6.12124L5.77819 6.18124H5.77519L5.77419 6.18324ZM13.2412 2.57524C13.2975 2.54148 13.36 2.51914 13.4249 2.50952C13.4899 2.49989 13.5561 2.50315 13.6198 2.51913C13.6835 2.5351 13.7435 2.56347 13.7962 2.60261C13.8489 2.64175 13.8935 2.69089 13.9272 2.74724L14.2232 3.24224C14.7218 4.0761 14.9893 5.02772 14.9982 5.99924C14.9995 6.13185 14.9481 6.25955 14.8553 6.35426C14.7625 6.44896 14.6358 6.50291 14.5032 6.50424C14.3706 6.50556 14.2429 6.45416 14.1482 6.36133C14.0535 6.2685 13.9995 6.14185 13.9982 6.00924C13.9911 5.21502 13.7727 4.43701 13.3652 3.75524L13.0692 3.26124C13.0354 3.2049 13.0131 3.14247 13.0035 3.0775C12.9938 3.01254 12.9971 2.94631 13.0131 2.88261C13.0291 2.8189 13.0574 2.75897 13.0966 2.70623C13.1357 2.65349 13.1848 2.60898 13.2412 2.57524Z"
@@ -309,6 +307,7 @@ export const HandIcon = () => {
 };
 export const InActiveIndicator = () => {
   return (
+    //@ts-ignore
     <Svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
       <G clip-path="url(#clip0_484_3458)">
         <Path
@@ -571,8 +570,7 @@ export const LocationIcon = () => {
           y1="9.16667"
           x2="12.6273"
           y2="9.20011"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -582,8 +580,7 @@ export const LocationIcon = () => {
           y1="10.2022"
           x2="17.0064"
           y2="10.2794"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -606,8 +603,7 @@ export const RadioButton = () => {
           y1="10"
           x2="20.5094"
           y2="10.1337"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -617,8 +613,7 @@ export const RadioButton = () => {
           y1="9.99999"
           x2="17.0062"
           y2="10.0892"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -711,8 +706,7 @@ export const SuccessPageLogo = () => {
       height="143"
       viewBox="0 0 243 143"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+      xmlns="http://www.w3.org/2000/svg">
       <Circle cx="122" cy="93" r="50" fill="#E9F9F2" />
       <Circle cx="122" cy="93" r="40" fill="#20BE79" />
       <G clip-path="url(#clip0_638_3072)">
@@ -1132,8 +1126,7 @@ export const ColoredCameraIcon = () => {
           y1="7.5"
           x2="13.4114"
           y2="7.58463"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -1143,8 +1136,7 @@ export const ColoredCameraIcon = () => {
           y1="8.125"
           x2="9.47051"
           y2="8.15008"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <Stop stop-color="#C83B62" />
           <Stop offset="1" stop-color="#7F35CD" />
         </LinearGradient>
@@ -1163,8 +1155,7 @@ export const RatingStar = () => {
       width="180"
       height="20"
       viewBox="0 0 180 20"
-      fill="none"
-    >
+      fill="none">
       <Path
         d="M10.796 0.539318C10.6553 0.211147 10.3436 0 10 0C9.65636 0 9.34473 0.211147 9.20402 0.539318L6.74626 6.27148L0.778712 6.94693C0.437065 6.9856 0.148924 7.23059 0.042734 7.5727C-0.0634561 7.9148 0.0320857 8.29029 0.28677 8.53178L4.73533 12.7499L3.50495 18.8995C3.43451 19.2516 3.56806 19.6141 3.84607 19.8256C4.12408 20.037 4.49476 20.0579 4.79287 19.879L10 16.7538L15.2071 19.879C15.5052 20.0579 15.8759 20.037 16.1539 19.8256C16.4319 19.6141 16.5655 19.2516 16.495 18.8995L15.2647 12.7499L19.7132 8.53178C19.9679 8.29029 20.0635 7.9148 19.9573 7.5727C19.8511 7.23059 19.5629 6.9856 19.2213 6.94693L13.2537 6.27148L10.796 0.539318Z"
         fill="#F16A26"
@@ -1335,8 +1326,7 @@ export const ModalCameraIcon = () => {
       stroke="black"
       fill="none"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <Path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
       <Path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
@@ -1359,8 +1349,7 @@ export const WhiteLogo = () => {
       width="160"
       height="36"
       viewBox="0 0 160 36"
-      fill="none"
-    >
+      fill="none">
       <Path
         d="M35.471 32.1668L31.5543 35.999L27.9304 32.1668H16.7292C11.3849 32.1668 6.80923 28.8873 4.83256 24.2445C4.3933 23.2127 4.06385 22.1073 3.91743 20.9281C3.84422 20.3386 3.80762 19.749 3.80762 19.1226V10.7949H9.4448V19.6016C9.4448 21.1492 9.95727 22.6232 10.7992 23.7654C11.7143 25.0183 12.9955 25.9395 14.4963 26.4185C15.1186 26.6028 15.7775 26.7133 16.473 26.7133H22.6592L22.586 26.6396L21.8905 25.9395L15.0088 18.7173H22.8056L29.6142 25.9395L29.724 26.05L35.471 32.1668Z"
         fill="white"
@@ -1448,8 +1437,7 @@ export const Eye = () => {
       stroke="rgba(0,0,0,0.7)"
       fill="none"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <Path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
       <Path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
@@ -1469,8 +1457,7 @@ export const Upload = () => {
       stroke="#C83B62"
       fill="none"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <Path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
       <Path d="M7 9l5 -5l5 5" />
@@ -1656,8 +1643,7 @@ export const ProfileIcon = () => {
       stroke="white"
       fill="none"
       stroke-linecap="round"
-      stroke-linejoin="round"
-    >
+      stroke-linejoin="round">
       <Path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <Path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
       <Path d="M16 19h6" />

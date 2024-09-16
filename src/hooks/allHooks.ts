@@ -172,42 +172,6 @@ export const useNotification = () => {
 
   return { data, setData, isLoading, err, setRefetch };
 };
-// export const useProductQuery = (query:any) => {
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [data, setData] = useState<any>([]);
-//     const [err, setErr] = useState(null);
-//     const [refetch, setRefetch] = useState(0);
-
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             setIsLoading(true);
-//             try {
-//                 const token = await AsyncStorage.getItem('accessToken');
-
-//                 const response = await fetch(`${mainUrl}/product?${query}`, {
-//                     headers: {
-//                         'Authorization': `bearer ${token}`
-//                     }
-//                 });
-//                 if (!response.ok) {
-//                     throw new Error('Network response was not ok');
-//                 }
-//                 const jsonData = await response.json();
-//                 setData(jsonData);
-//             } catch (error:any) {
-//                 setErr(error);
-//             } finally {
-//                 setIsLoading(false);
-//             }
-//         };
-
-//         fetchData();
-//     }, [ refetch]);
-
-//     return { data, setData, isLoading, err, setRefetch };
-// };
-
-// Modify the useProductQuery hook
 
 export const useProductQuery = (query: any) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -1001,7 +965,7 @@ export const useUpdateCart = () => {
   const [err, setErr] = useState(null);
   // const [refetch, setRefetch] = useState(0);
 
-  const updateCart = async (updateData: { products: Array<{}> }) => {
+  const updateCart = async (updateData: { products: any }) => {
     setIsLoading(true);
     try {
       const token = await AsyncStorage.getItem('accessToken');

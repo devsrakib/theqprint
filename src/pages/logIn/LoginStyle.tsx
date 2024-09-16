@@ -190,5 +190,6 @@ export const loginStyle = StyleSheet.create({
   continueButton: {
     height: 50,
     borderRadius: 25,
+    marginTop: 30,
   },
 });

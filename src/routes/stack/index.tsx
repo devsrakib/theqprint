@@ -229,37 +229,7 @@ const BottomTab = () => {
 };
 
 const Index = () => {
-  const navigation = useNavigation<any>();
   const [initialRoute, setInitialRoute] = useState<string | undefined>(undefined);
-
-  // const { data } = useUser();
-
-  // useEffect(() => {
-  //   const checkAccessToken = async () => {
-  //     // const accessToken = await isLoggedIn();
-  //     const accessToken = await AsyncStorage.getItem('accessToken');
-  //     // const accessToken = await AsyncStorage.getItem('verifyUser');
-  //     const res = await fetch(mainUrl + 'api/v1/user/me', {
-  //       method: 'GET',
-  //       headers: {
-  //         Authorization: `bearer ${accessToken}`,
-  //       },
-  //     });
-
-  //     const data = await res.json();
-  //     if (data && data?.success) {
-  //       if (data?.data?.isVerified) {
-  //         setInitialRoute('BottomTab');
-  //       } else {
-  //         navigation.navigate('login');
-  //       }
-  //     } else {
-  //       setInitialRoute('login');
-  //     }
-  //   };
-
-  //   checkAccessToken();
-  // }, [initialRoute]);
 
   useEffect(() => {
     const checkAccessToken = async () => {
@@ -302,7 +272,7 @@ const Index = () => {
   return (
     // {/* // <Stack.Navigator initialRouteName="SignUp"> */}
     // <Stack.Navigator initialRouteName={`OTP`}>
-    <Stack.Navigator initialRouteName={initialRoute}>
+    <Stack.Navigator initialRouteName={'BottomTab'}>
       <Stack.Screen options={{ headerShown: false }} name="onboarding" component={Onboarding} />
       <Stack.Screen options={{ headerShown: false }} name="login" component={Login} />
       <Stack.Screen options={{ headerShown: false }} name="SignUp" component={SignUp} />

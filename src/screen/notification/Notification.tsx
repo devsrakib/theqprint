@@ -13,20 +13,19 @@
  * @returns JSX.Element
  */
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
-import NotificationItem from '../../components/notificationItem/NotificationItem';
-import CommonHeader from '../../components/common/commonHeader/CommonHeader';
+
 import { notificationStyle } from './NotificationStyle';
-import { StatusBar } from 'expo-status-bar';
-import { INotification } from '../../types/interfaces/notify.interface';
-import NotificationSkeleton from '../../components/skeleton/notification.skeleton';
-import * as Notifications from 'expo-notifications';
 import EmptyData from '../../components/common/EmptyData';
-import { useNotification } from '../../hooks/allHooks';
-import { Color } from '../../constants/GlobalStyle';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import CommonHeader from '../../components/common/commonHeader/CommonHeader';
+import NotificationItem from '../../components/notificationItem/NotificationItem';
+import NotificationSkeleton from '../../components/skeleton/notification.skeleton';
 import CustomActivityLoader from '../../constants/CustomAcitvityLoader';
+import { useNotification } from '../../hooks/allHooks';
+import { INotification } from '../../types/interfaces/notify.interface';
 const Notification = () => {
   const { data, isLoading, setRefetch } = useNotification();
   const [refreshing, setRefreshing] = useState(false);
@@ -93,16 +92,16 @@ const Notification = () => {
     }
   };
 
-  async function schedulePushNotification() {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "You've got mail! 📬",
-        body: 'Here is the notification body',
-        data: { data: 'goes here' },
-      },
-      trigger: { seconds: 2 },
-    });
-  }
+  // async function schedulePushNotification() {
+  //   await Notifications.scheduleNotificationAsync({
+  //     content: {
+  //       title: "You've got mail! 📬",
+  //       body: 'Here is the notification body',
+  //       data: { data: 'goes here' },
+  //     },
+  //     trigger: { seconds: 2 },
+  //   });
+  // }
 
   return (
     <View style={notificationStyle.container}>
@@ -130,7 +129,7 @@ const Notification = () => {
             onEndReached={fetchData}
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
-            removeClippedSubviews={true}
+            removeClippedSubviews
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
           />
           {/* {data?.data?.map((item: INotification) => {
