@@ -1,19 +1,11 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
-  StyleSheet,
-} from 'react-native';
-import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { IProduct } from '../../../types/interfaces/product.interface';
+
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
-import { getBaseUrl } from '../../../helpers/config/envConfig';
 import { mainUrl } from '../../../constants/mainUrl';
+import { IProduct } from '../../../types/interfaces/product.interface';
 
 const RelatedProduct = ({ item, scrollToTop }: { item: IProduct; scrollToTop: any }) => {
   const navigation: any = useNavigation();
@@ -65,8 +57,8 @@ const RelatedProduct = ({ item, scrollToTop }: { item: IProduct; scrollToTop: an
                   style={[
                     styles.paginationDot,
                     {
-                      width: currentIndex == index ? 10 : 5,
-                      backgroundColor: currentIndex == index ? Color.C_H_black : '#7F35CD',
+                      width: currentIndex === index ? 10 : 5,
+                      backgroundColor: currentIndex === index ? Color.C_H_black : '#7F35CD',
                     },
                   ]}
                 />
@@ -98,7 +90,6 @@ const RelatedProduct = ({ item, scrollToTop }: { item: IProduct; scrollToTop: an
 
 export default RelatedProduct;
 
-const DimensionsWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   container: {
     width: 190,

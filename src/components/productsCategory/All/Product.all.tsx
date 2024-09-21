@@ -66,9 +66,7 @@ const ProductAll = ({ brandName, searchText }: { brandName: string; searchText: 
 
   return (
     <>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Product Found" />
-      ) : searchedOnce || isLoading ? (
+      {searchedOnce || isLoading ? (
         <AllProductSkeleton />
       ) : (
         <View style={styles.container}>
@@ -80,13 +78,13 @@ const ProductAll = ({ brandName, searchText }: { brandName: string; searchText: 
             onEndReached={fetchData}
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
-            removeClippedSubviews={true}
+            removeClippedSubviews
             numColumns={2}
             contentContainerStyle={styles.listContainer}
+            ListEmptyComponent={<EmptyData width={140} height={140} children="No online order" />}
           />
         </View>
       )}
-      {/* {isLoading && <AllProductSkeleton />} */}
     </>
   );
 };
@@ -101,6 +99,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     justifyContent: 'space-between',
+    flex: 1,
   },
   itemContainer: {
     flex: 0.5, // Make each item take half of the available width (for 2 columns)

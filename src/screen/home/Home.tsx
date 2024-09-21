@@ -99,14 +99,23 @@ const Home = () => {
           {sortedDataLoading ? (
             <Cart_Skeleton />
           ) : (
-            <ScrollView
-              contentContainerStyle={{ paddingHorizontal: 10 }}
+            // <ScrollView
+            //   contentContainerStyle={{ paddingHorizontal: 10 }}
+            //   showsHorizontalScrollIndicator={false}
+            //   horizontal>
+            //   {sortedData?.data?.map((item: IProduct, index: number) => (
+            //     <OfferCart key={index?.toString()} item={item} />
+            //   ))}
+            <FlatList
+              data={[]}
+              horizontal
+              contentContainerStyle={{ paddingHorizontal: 10, flex: 1 }}
               showsHorizontalScrollIndicator={false}
-              horizontal>
-              {sortedData?.data?.map((item: IProduct, index: number) => (
-                <OfferCart key={index?.toString()} item={item} />
-              ))}
-            </ScrollView>
+              renderItem={({ item, index }) => {
+                return <OfferCart key={index?.toString()} item={item} />;
+              }}
+              ListEmptyComponent={<EmptyData width={90} height={90} children="No Offer Cart" />}
+            />
           )}
 
           {/* All Cart Section */}
@@ -114,8 +123,6 @@ const Home = () => {
           <View style={homePageStyle.cordContainer}>
             {loadingProduct ? (
               <Cart_Skeleton />
-            ) : productData?.data?.length === 0 ? (
-              <EmptyData children="No Data" />
             ) : (
               <FlatList
                 data={productData?.data}
@@ -127,6 +134,7 @@ const Home = () => {
                 windowSize={10}
                 maxToRenderPerBatch={6}
                 removeClippedSubviews
+                ListEmptyComponent={<EmptyData width={90} height={90} children="No Data" />}
               />
             )}
           </View>

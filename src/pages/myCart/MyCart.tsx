@@ -158,16 +158,16 @@ const MyCart = () => {
       {/* {products?.length === 0 ? (
         <EmptyData children="no cart" />
       ) : ( */}
-      {cartData?.data?.products?.length === 0 ? (
-        <EmptyData children="No cart" />
-      ) : (
-        <Animated.FlatList
-          data={cartData?.data?.products}
-          renderItem={({ item }: any) => {
-            return <AddToCart item={item} />;
-          }}
-        />
-      )}
+
+      <Animated.FlatList
+        data={cartData?.data?.products}
+        renderItem={({ item }: any) => {
+          return <AddToCart item={item} />;
+        }}
+        contentContainerStyle={{ flex: 1 }}
+        ListEmptyComponent={<EmptyData children="No Cart" width={140} height={140} />}
+      />
+
       {/* )} */}
 
       {/* Total price, progress bar, free shipping information, and proceed to checkout button */}

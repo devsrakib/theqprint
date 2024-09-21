@@ -55,9 +55,7 @@ const Cartridge = ({ itemId, searchText }: { itemId: string; searchText: string 
   };
   return (
     <>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No cartridge available" />
-      ) : isLoading ? (
+      {isLoading ? (
         <AllProductSkeleton />
       ) : (
         <View style={styles.container}>
@@ -70,7 +68,8 @@ const Cartridge = ({ itemId, searchText }: { itemId: string; searchText: string 
             ListFooterComponent={renderFooter}
             removeClippedSubviews={true}
             numColumns={2}
-            contentContainerStyle={{ justifyContent: 'space-between' }}
+            contentContainerStyle={{ justifyContent: 'space-between', flex: 1 }}
+            ListEmptyComponent={<EmptyData width={140} height={140} children="No online order" />}
           />
         </View>
       )}

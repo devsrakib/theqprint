@@ -37,6 +37,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { IProduct } from '../../types/interfaces/product.interface';
 import { useBrandQuery, useGetCart, useProductQuery, useSearch } from '../../hooks/allHooks';
 import { Badge } from 'react-native-paper';
+//@ts-ignore
 import { debounce } from 'lodash';
 import CustomActivityLoader from '../../constants/CustomAcitvityLoader';
 import EmptyData from '~/components/common/EmptyData';
@@ -124,11 +125,10 @@ const Search = () => {
           activeOpacity={0.7}
           style={searchStyle.AddToCartContainer}>
           <CartBag />
-          {
-            <Badge style={{ position: 'absolute', top: -8, right: -5 }}>
-              {data?.data?.products?.length}
-            </Badge>
-          }
+
+          <Badge style={{ position: 'absolute', top: -8, right: -5 }}>
+            {data?.data?.products?.length}
+          </Badge>
         </TouchableOpacity>
       </View>
 
@@ -158,21 +158,20 @@ const Search = () => {
                 marginTop: 20,
                 paddingHorizontal: 10,
               }}>
-              {items?.length === 0 ? (
-                <EmptyData children="No search result found" />
-              ) : (
-                <FlatList
-                  data={items}
-                  renderItem={renderItem}
-                  keyExtractor={(item: any, index) => `${item.key}${index}`}
-                  onEndReached={fetchData}
-                  onEndReachedThreshold={0.5}
-                  ListFooterComponent={renderFooter}
-                  removeClippedSubviews={true}
-                  numColumns={2}
-                  contentContainerStyle={{ justifyContent: 'space-between' }}
-                />
-              )}
+              <FlatList
+                data={items}
+                renderItem={renderItem}
+                keyExtractor={(item: any, index) => `${item.key}${index}`}
+                onEndReached={fetchData}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={renderFooter}
+                removeClippedSubviews
+                numColumns={2}
+                ListEmptyComponent={
+                  <EmptyData children="No search result found" width={140} height={140} />
+                }
+                contentContainerStyle={{ justifyContent: 'space-between' }}
+              />
             </View>
           </View>
         </ScrollView>

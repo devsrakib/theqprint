@@ -21,47 +21,43 @@ const ProductReviews = ({ item }: { item: any }) => {
         <Text style={productReviewsStyle.ratingAndReviewsText}>
           Ratings & Reviews ({review?.data?.length})
         </Text>
-        {review?.data?.length !== 0 ? (
-          <FlatList
-            data={review?.data}
-            renderItem={({ item }) => {
-              return (
-                <View style={productReviewsStyle.reviewerCon}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Image
-                      style={productReviewsStyle.reviewerImg}
-                      source={{ uri: `${mainUrl}${item?.reviewer?.profilePhoto}` }}
-                    />
-                    <View style={productReviewsStyle.reviewerNameAndDate}>
-                      <Text style={productReviewsStyle.reviewerName}>
-                        {item?.reviewer?.fullName}
-                      </Text>
-                      <Text style={productReviewsStyle.reviewDate}>
-                        {formatDate(item?.createdAt)}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={{ alignItems: 'flex-start', marginLeft: 60 }}>
-                    <Rating
-                      type="custom"
-                      ratingCount={5}
-                      imageSize={16}
-                      ratingBackgroundColor="#e9e9e9"
-                      ratingColor="#F16A26"
-                      ratingTextColor="#e9e9e9"
-                      startingValue={item?.rating}
-                      readonly
-                      style={{ marginBottom: 8 }}
-                    />
-                    <Text style={{ fontSize: Font.Font_S }}>{item?.comment}</Text>
+        <FlatList
+          data={review?.data}
+          renderItem={({ item }) => {
+            return (
+              <View style={productReviewsStyle.reviewerCon}>
+                <View style={{ flexDirection: 'row' }}>
+                  <Image
+                    style={productReviewsStyle.reviewerImg}
+                    source={{ uri: `${mainUrl}${item?.reviewer?.profilePhoto}` }}
+                  />
+                  <View style={productReviewsStyle.reviewerNameAndDate}>
+                    <Text style={productReviewsStyle.reviewerName}>{item?.reviewer?.fullName}</Text>
+                    <Text style={productReviewsStyle.reviewDate}>
+                      {formatDate(item?.createdAt)}
+                    </Text>
                   </View>
                 </View>
-              );
-            }}
-          />
-        ) : (
-          <EmptyData children="No Review" />
-        )}
+                <View style={{ alignItems: 'flex-start', marginLeft: 60 }}>
+                  <Rating
+                    type="custom"
+                    ratingCount={5}
+                    imageSize={16}
+                    ratingBackgroundColor="#e9e9e9"
+                    ratingColor="#F16A26"
+                    ratingTextColor="#e9e9e9"
+                    startingValue={item?.rating}
+                    readonly
+                    style={{ marginBottom: 8 }}
+                  />
+                  <Text style={{ fontSize: Font.Font_S }}>{item?.comment}</Text>
+                </View>
+              </View>
+            );
+          }}
+          contentContainerStyle={{ flex: 1 }}
+          ListEmptyComponent={<EmptyData width={140} height={140} children="No online order" />}
+        />
       </View>
     </Animated.View>
   );

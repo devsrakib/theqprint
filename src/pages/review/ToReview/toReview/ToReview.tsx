@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, RefreshControl } from 'react-native';
 import ReviewCart from '../../../../components/toReviewCom/reviewCart/ReviewCart';
-import { useGetProductReviewQuery } from '../../../../redux/api/reviewSlice';
 import ReviewSkeleton from '../../../../components/skeleton/Review.skeleton';
 import { Color } from '../../../../constants/GlobalStyle';
 import { IOrderReview } from '../../../../types/interfaces/review.interface';
@@ -67,9 +66,7 @@ const ToReview = () => {
 
   return (
     <View style={{ backgroundColor: '#fff', flex: 1 }}>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Online order" />
-      ) : isLoading ? (
+      {isLoading ? (
         <ReviewSkeleton />
       ) : (
         <FlatList
@@ -80,7 +77,9 @@ const ToReview = () => {
           onEndReachedThreshold={0.5}
           ListFooterComponent={renderFooter}
           removeClippedSubviews={true}
+          contentContainerStyle={{ flex: 1 }}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          ListEmptyComponent={<EmptyData children="No Review" width={140} height={140} />}
         />
       )}
     </View>

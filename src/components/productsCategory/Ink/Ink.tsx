@@ -55,9 +55,7 @@ const Ink = ({ itemId, searchText }: { itemId: string; searchText: string }) => 
   };
   return (
     <>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Product Found" />
-      ) : isLoading ? (
+      {isLoading ? (
         <AllProductSkeleton />
       ) : (
         // <></>
@@ -71,7 +69,8 @@ const Ink = ({ itemId, searchText }: { itemId: string; searchText: string }) => 
             ListFooterComponent={renderFooter}
             removeClippedSubviews={true}
             numColumns={2}
-            contentContainerStyle={{ justifyContent: 'space-between' }}
+            contentContainerStyle={{ justifyContent: 'space-between', flex: 1 }}
+            ListEmptyComponent={<EmptyData width={140} height={140} children="No Product Found" />}
           />
         </View>
       )}

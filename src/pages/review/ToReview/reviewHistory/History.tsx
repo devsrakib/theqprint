@@ -22,9 +22,7 @@ const History = () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Review History" />
-      ) : isLoading ? (
+      {isLoading ? (
         <ReviewSkeleton />
       ) : (
         <FlatList
@@ -34,6 +32,8 @@ const History = () => {
           }}
           keyExtractor={(item) => item?._id}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          contentContainerStyle={{ flex: 1 }}
+          ListEmptyComponent={<EmptyData children="No Review History" width={140} height={140} />}
         />
       )}
     </View>

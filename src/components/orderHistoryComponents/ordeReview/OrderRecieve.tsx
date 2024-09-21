@@ -1,11 +1,11 @@
-import { View, Text, FlatList } from 'react-native';
 import React, { useEffect } from 'react';
-import { orderPlacedStyle } from '../order_placed/Order_placedStyle';
-import OrderPlaceCart from '../order_placed/orderPlaceCart/OrderPlaceCart';
-import { useGetOnlineOrderQuery } from '../../../redux/api/onlineOrderSlice';
-import OrderTrackSkeleton from '../../skeleton/orderTrack.skeleton';
+import { View, FlatList } from 'react-native';
+
 import { useGetOnlineOrder, useUser } from '../../../hooks/allHooks';
 import EmptyData from '../../common/EmptyData';
+import OrderTrackSkeleton from '../../skeleton/orderTrack.skeleton';
+import { orderPlacedStyle } from '../order_placed/Order_placedStyle';
+import OrderPlaceCart from '../order_placed/orderPlaceCart/OrderPlaceCart';
 
 const OrderRecieve = () => {
   const { data: userData } = useUser();
@@ -18,9 +18,7 @@ const OrderRecieve = () => {
   }, [userData]);
   return (
     <View style={orderPlacedStyle.container}>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No online order" />
-      ) : isLoading ? (
+      {isLoading ? (
         <FlatList
           data={[1, 1, 1, 1, 1, 1]}
           renderItem={({ item }) => {
@@ -30,10 +28,12 @@ const OrderRecieve = () => {
       ) : (
         <FlatList
           data={data?.data}
+          contentContainerStyle={{ flex: 1 }}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => {
             return <OrderPlaceCart orderPlace={item} />;
           }}
+          ListEmptyComponent={<EmptyData width={140} height={140} children="No online order" />}
         />
       )}
     </View>

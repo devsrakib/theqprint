@@ -111,10 +111,10 @@ const Summery: React.FC = (props) => {
 
   const formatExistingCart = (existCart: Array<ICartData>) => {
     return [
-      ...existCart.map((cartItem) => ({
-        productId: cartItem.productId,
-        variantName: cartItem.variant.variantName,
-        orderQuantity: cartItem.orderQuantity,
+      ...existCart?.map((cartItem) => ({
+        productId: cartItem?.productId,
+        variantName: cartItem?.variant?.variantName,
+        orderQuantity: cartItem?.orderQuantity,
       })),
     ];
   };
@@ -155,29 +155,29 @@ const Summery: React.FC = (props) => {
     for (const key in item) {
       if (!isNaN(Number(key))) {
         const product = item[key];
-        const variant = product.variant; // Access the variant object
+        const variant = product?.variant; // Access the variant object
 
         if (variant) {
           let pricePerItem = variant?.sellingPrice;
 
           // If discounted price is available, use it instead
-          if (variant.discountedPrice) {
+          if (variant?.discountedPrice) {
             pricePerItem = variant?.discountedPrice;
           }
 
-          if (variant && variant.discountPercentage) {
+          if (variant && variant?.discountPercentage) {
             // Accumulate the discount percentage
-            totalDiscountPercentage += variant.discountPercentage;
+            totalDiscountPercentage += variant?.discountPercentage;
           }
 
           if (
             variant &&
-            variant.discountedPrice &&
-            variant.discountedPrice < variant.sellingPrice
+            variant?.discountedPrice &&
+            variant?.discountedPrice < variant?.sellingPrice
           ) {
             // Calculate the discounted amount for the current variant
             const discountedAmount =
-              (variant.sellingPrice - variant.discountedPrice) * product.quantity;
+              (variant?.sellingPrice - variant?.discountedPrice) * product?.quantity;
 
             // Accumulate the discounted amount
             totalDiscountedAmount += discountedAmount;
@@ -223,8 +223,11 @@ const Summery: React.FC = (props) => {
 
   // Check if item exists and if it's an object with properties
   if (item?.CartItem) {
+    if (!item?.CartItem) {
+      return;
+    }
     // format cart items for order
-    orderItems = formatExistingCart(item.data?.products);
+    orderItems = formatExistingCart(item?.data?.products);
   } else {
     const orderItem = {
       productId: item?._id,

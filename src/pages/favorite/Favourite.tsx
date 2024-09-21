@@ -20,21 +20,21 @@ const Favorite = () => {
         {/* header section */}
         <CommonHeader title="My Favorite" cartBox={false} />
         {/* body section */}
-        {favCtxValue?.data?.data?.products?.length === 0 ? (
-          <EmptyData children="No Favourite" />
-        ) : (
-          <View style={favoriteStyle.bodyContainer}>
-            <FlatList
-              data={favCtxValue?.data?.data?.products}
-              onViewableItemsChanged={({ viewableItems: vItems }) => {
-                viewableItems.value = vItems;
-              }}
-              renderItem={({ item }) => {
-                return <FavoriteCart item={item} viewableItems={viewableItems} />;
-              }}
-            />
-          </View>
-        )}
+
+        <View style={favoriteStyle.bodyContainer}>
+          <FlatList
+            data={favCtxValue?.data?.data?.products}
+            onViewableItemsChanged={({ viewableItems: vItems }) => {
+              viewableItems.value = vItems;
+            }}
+            contentContainerStyle={{ flex: 1 }}
+            ListEmptyComponent={<EmptyData children="No Favourite" width={140} height={140} />}
+            renderItem={({ item }) => {
+              return <FavoriteCart item={item} viewableItems={viewableItems} />;
+            }}
+          />
+        </View>
+
         <StatusBar style="dark" />
       </View>
     </>

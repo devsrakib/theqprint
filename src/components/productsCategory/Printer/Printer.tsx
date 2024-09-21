@@ -57,9 +57,7 @@ const Printer = ({ itemId, searchText }: { itemId: string; searchText: string })
 
   return (
     <>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Product Found" />
-      ) : isLoading ? (
+      {isLoading ? (
         <AllProductSkeleton />
       ) : (
         // <></>
@@ -73,7 +71,8 @@ const Printer = ({ itemId, searchText }: { itemId: string; searchText: string })
             ListFooterComponent={renderFooter}
             removeClippedSubviews={true}
             numColumns={2}
-            contentContainerStyle={{ justifyContent: 'space-between' }}
+            contentContainerStyle={{ justifyContent: 'space-between', flex: 1 }}
+            ListEmptyComponent={<EmptyData children="No Product Found" width={140} height={140} />}
           />
         </Animated.View>
       )}

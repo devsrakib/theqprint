@@ -16,9 +16,7 @@ const OrderRecieve = () => {
   }, [userData]);
   return (
     <View style={{ flex: 1, backgroundColor: Color.C_white }}>
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No Printing request" />
-      ) : isLoading ? (
+      {isLoading ? (
         <FlatList
           data={[1, 1, 1, 1, 1]}
           renderItem={({ item }) => {
@@ -32,7 +30,8 @@ const OrderRecieve = () => {
             return <PrintingDetailsCard item={item} />;
           }}
           keyExtractor={(item, index) => index.toString()}
-          contentContainerStyle={{ paddingBottom: !data ? 0 : 100 }}
+          contentContainerStyle={{ paddingBottom: !data ? 0 : 100, flex: 1 }}
+          ListEmptyComponent={<EmptyData children="No Order Receive" width={140} height={140} />}
         />
       )}
     </View>

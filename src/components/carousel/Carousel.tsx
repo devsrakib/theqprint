@@ -19,6 +19,7 @@ import { View, Animated } from 'react-native';
 import Pagination from './Pagination';
 import SliderItem from './SliderItem';
 import { useCarousel } from '../../hooks/allHooks';
+import EmptyData from '../common/EmptyData';
 const Carousel = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const [index, setIndex] = useState<number>(0);
@@ -59,7 +60,9 @@ const Carousel = () => {
         renderItem={({ item }) => <SliderItem item={item} />}
         // keyExtractor={item => item?._id}
         onScroll={handleOnScroll}
+        contentContainerStyle={{ flex: 1 }}
         onViewableItemsChanged={handleOnViewableItemsChanged}
+        ListEmptyComponent={<EmptyData width={90} height={90} children="No Carousel" />}
       />
       {/* Pagination dots */}
       <Pagination data={sliderArray} scrollX={scrollX} index={index} />

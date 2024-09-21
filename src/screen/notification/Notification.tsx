@@ -109,9 +109,7 @@ const Notification = () => {
       <CommonHeader title="Notification" cartBox={true} />
 
       {/* Body Section */}
-      {data?.data?.length === 0 ? (
-        <EmptyData children="No notifications" />
-      ) : isLoading ? (
+      {isLoading ? (
         <FlatList
           data={[...Array(10)]}
           keyExtractor={(_, index) => index.toString()}
@@ -130,6 +128,8 @@ const Notification = () => {
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
             removeClippedSubviews
+            contentContainerStyle={{ flex: 1 }}
+            ListEmptyComponent={<EmptyData children="No Notifications" width={140} height={140} />}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
           />
           {/* {data?.data?.map((item: INotification) => {

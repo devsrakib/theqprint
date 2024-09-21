@@ -12,7 +12,6 @@ import { useNavigation } from '@react-navigation/native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { IProduct } from '../../../types/interfaces/product.interface';
 import { Color, Font, shadows } from '../../../constants/GlobalStyle';
-import { getBaseUrl } from '../../../helpers/config/envConfig';
 import { mainUrl } from '../../../constants/mainUrl';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -20,7 +19,6 @@ import { AntDesign } from '@expo/vector-icons';
 
 const OfferCart = ({ item }: { item: IProduct }) => {
   const navigation: any = useNavigation();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const defaultItem = item.variants?.find((defaultVariant) => defaultVariant?.isDefault);
 
   return (
@@ -29,8 +27,7 @@ const OfferCart = ({ item }: { item: IProduct }) => {
         activeOpacity={0.7}
         onPress={() => {
           navigation.navigate('ProductDetails', { productId: item?._id });
-        }}
-      >
+        }}>
         <View style={styles.imgCon}>
           {/* <FlatList
             pagingEnabled={true}
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.C_white,
     borderRadius: 10,
     shadowColor: shadows.shadow_color,
-    elevation: shadows.elevation_1,
+    elevation: shadows.elevation_2,
     shadowOffset: {
       width: shadows.offsetWidth_1,
       height: shadows.offsetHeight_1,
@@ -128,6 +125,7 @@ const styles = StyleSheet.create({
     shadowOpacity: shadows.opacity_1,
     marginHorizontal: 10,
     marginBottom: 20,
+    marginTop: 10,
   },
   discountCon: {
     width: 30,

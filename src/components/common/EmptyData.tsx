@@ -1,12 +1,19 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { EmptyDataLogo } from '../../../assets/allSvg/AllSvg';
 
-const EmptyData = ({ children }: { children: string }) => {
+const EmptyData = ({
+  children,
+  width,
+  height,
+}: {
+  children: string;
+  width: number;
+  height: number;
+}) => {
   return (
     <View style={styles.container}>
       <Image
-        style={{ width: 140, height: 140 }}
+        style={{ width: width, height: height }}
         source={require('../../../assets/image/emptyData.png')}
       />
       <Text style={{ fontSize: 30, color: 'rgba(0,0,0,0.6)', marginTop: 20 }}>Opp's</Text>
@@ -25,5 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
+    paddingVertical: 20,
   },
 });
